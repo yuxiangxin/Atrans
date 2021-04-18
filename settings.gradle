@@ -1,0 +1,4 @@
+include ':buildAto'
+include ':ato'
+include ':app'
+rootProject.name = "Droid2Ohos"
