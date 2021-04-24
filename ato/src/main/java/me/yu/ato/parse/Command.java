@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'java-library'
-}
+package me.yu.ato.parse;
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_7
-    targetCompatibility = JavaVersion.VERSION_1_7
-}
-
-dependencies {
-    implementation files('libs/xpp3-1.1.4c.jar')
+/**
+ * 输入命令解析结果
+ *
+ * @author yuxiangxin
+ * @since 2021-04-23
+ */
+public interface Command extends Runnable {
 }

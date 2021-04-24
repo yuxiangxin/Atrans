@@ -1,0 +1,40 @@
+1. Android Layout,等资源文件转OHOS
+
+1. string.xml  key-value
+2. boolean.xml key-value
+7. dimens.xml key-value
+color.xml key-value
+
+3. style.xml   key[key-value]
+
+4. xxx-layout.xml  layout
+5. drawable.xml   select|shape|...
+6. attrs.xml  暂不支持
+
+
+x. anim.xml
+
+ 1.大致流程
+
+ ato
+
+ 使用示例
+
+ato /h
+ 输出帮助文档
+
+ato /c
+ 阅读模式, 转换结果在控制台打印, 不保存文件中
+
+ato /d path
+ 指定结果保存目录, 如不指定默认输出当前工作目录 .\aro\下
+
+ato /s xxx.xml
+ 指定目标文件
+
+ato /s dir [ext][*.xml,string]
+ 指定目标目录, ext:文件匹配规则, 如不指定过滤规则 则目标目录下全部文件
+
+
+
+

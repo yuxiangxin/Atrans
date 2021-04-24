@@ -14,15 +14,25 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'java-library'
-}
+package me.yu.ato.parse;
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_7
-    targetCompatibility = JavaVersion.VERSION_1_7
-}
+/**
+ * Key-Value
+ *
+ * @author yuxiangxin
+ * @since 2021-04-23
+ */
+public class KeyValueTranslate extends AbsTranslate{
 
-dependencies {
-    implementation files('libs/xpp3-1.1.4c.jar')
+    @Override
+    public void run() {
+        /*
+        <color name="text_color_eeeeee">#eeeeee</color>
+        <bool name="out_fits_system_windows">true</bool>
+        <dimen name="text_size_22">22sp</dimen>
+        <string name="confirm">确定</string>
+        */
+
+        // 1.解析数据
+    }
 }

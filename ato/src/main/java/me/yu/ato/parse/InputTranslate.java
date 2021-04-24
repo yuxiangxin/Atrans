@@ -14,15 +14,22 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'java-library'
-}
+package me.yu.ato.parse;
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_7
-    targetCompatibility = JavaVersion.VERSION_1_7
-}
+import java.util.List;
 
-dependencies {
-    implementation files('libs/xpp3-1.1.4c.jar')
+/**
+ * 转换
+ *
+ * @author yuxiangxin
+ * @since 2021-04-23
+ */
+public class InputTranslate  {
+    private String chdir;
+    private String src;
+    private String dst;
+    private boolean catMode;
+    private List<String> matchesRegex;
+
+
 }

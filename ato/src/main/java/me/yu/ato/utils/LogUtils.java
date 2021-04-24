@@ -14,15 +14,22 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'java-library'
-}
+package me.yu.ato.utils;
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_7
-    targetCompatibility = JavaVersion.VERSION_1_7
-}
+/**
+ * 日志打印
+ *
+ * @author yuxiangxin
+ * @since 2021-04-23
+ */
+public class LogUtils {
 
-dependencies {
-    implementation files('libs/xpp3-1.1.4c.jar')
+    public static void v(String tag, String format, Object value) {
+        v(tag, String.format(format, value));
+    }
+
+    public static void v(String tag, String msg) {
+        System.out.println(tag + " : " + msg);
+    }
+
 }

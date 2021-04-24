@@ -14,15 +14,24 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'java-library'
-}
+package me.yu.ato.parse;
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_7
-    targetCompatibility = JavaVersion.VERSION_1_7
-}
+import java.util.List;
 
-dependencies {
-    implementation files('libs/xpp3-1.1.4c.jar')
+/**
+ * 抽象转换
+ *
+ * @author yuxiangxin
+ * @since 2021-04-23
+ */
+public abstract class AbsTranslate implements Command {
+    private String chdir;
+    private List<String> src;
+    private List<String> dst;
+    private boolean isCat;
+
+    @Override
+    public void run() {
+
+    }
 }
