@@ -14,24 +14,17 @@
  * limitations under the License.
  */
 
-package me.yu.ato.parse;
-
-import java.util.List;
+package me.yu.ato.commandparse;
 
 /**
- * 抽象转换
+ * 解析异常
  *
  * @author yuxiangxin
- * @since 2021-04-23
+ * @since 2021-04-26
  */
-public abstract class AbsTranslate implements Command {
-    private String chdir;
-    private List<String> src;
-    private List<String> dst;
-    private boolean isCat;
+public class CannotParseException extends RuntimeException {
 
-    @Override
-    public void run() {
-
+    public CannotParseException(String message, String error) {
+        super(message + ": " + error);
     }
 }

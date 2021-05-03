@@ -14,13 +14,28 @@
  * limitations under the License.
  */
 
-package me.yu.ato.parse;
+package me.yu.ato.utils;
 
 /**
- * 未知
+ * 工具类
  *
  * @author yuxiangxin
- * @since 2021-04-23
+ * @since 2021-04-26
  */
-public class UnKnow extends Help {
+public class Utils {
+    public static boolean isEmpty(String value) {
+        return value == null || "".equals(value);
+    }
+
+    public static boolean isTrimEmpty(String value) {
+        return value == null || "".equals(value.trim());
+    }
+
+    public static boolean isEmpty(String[] value) {
+        return value == null || value.length == 0;
+    }
+
+    public static <T> T getDefault(T value, T checkValue, T defValue) {
+        return value == checkValue ? defValue : value;
+    }
 }

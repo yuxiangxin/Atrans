@@ -14,33 +14,30 @@
  * limitations under the License.
  */
 
-package me.yu.ato;
+package me.yu.ato.commandparse;
 
+import me.yu.ato.NextArray;
 import me.yu.ato.command.InputTranslate;
-import me.yu.ato.commandparse.CommandParse;
+import me.yu.ato.utils.LogUtils;
 
 /**
- * ATO转换入口
- *
  * @author yuxiangxin
- * @since 2021-04-18
+ * @since 2021-05-03
  */
-public class Main {
-    public static void main(String[] args) {
-        System.out.println("The java code already execute!" + "main");
-        /*
-        1.识别,
-        2.转换
-         */
+public interface ValueParse {
+    void parse(NextArray values, InputTranslate result);
+
+    default void test(String[] array) {
         try {
-            InputTranslate parse = CommandParse.parse(args);
+            String[] fixArray = new String[array.length + 1];
+            System.arraycopy(array, 0, fixArray, 1, array.length);
+            fixArray[0] = "base";
+            ValueParse handler = getClass().newInstance();
+            InputTranslate result = new InputTranslate();
+            handler.parse(new NextArray(fixArray), result);
+            LogUtils.v(getClass().getSimpleName(), "result:" + result);
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println(formatGuide(e));
         }
-    }
-
-    private static String formatGuide(Exception e) {
-        return e.getMessage();
     }
 }

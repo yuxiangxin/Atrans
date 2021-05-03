@@ -14,25 +14,24 @@
  * limitations under the License.
  */
 
-package me.yu.ato.parse;
+package me.yu.ato.commandparse.filter;
+
+import java.io.File;
+import java.io.FileFilter;
 
 /**
- * Key-Value
- *
  * @author yuxiangxin
- * @since 2021-04-23
+ * @since 2021-05-02
  */
-public class KeyValueTranslate extends AbsTranslate{
+public class EqualsFilter implements FileFilter {
+    private String rule;
+
+    public EqualsFilter(String rule) {
+        this.rule = rule;
+    }
 
     @Override
-    public void run() {
-        /*
-        <color name="text_color_eeeeee">#eeeeee</color>
-        <bool name="out_fits_system_windows">true</bool>
-        <dimen name="text_size_22">22sp</dimen>
-        <string name="confirm">确定</string>
-        */
-
-        // 1.解析数据
+    public boolean accept(File file) {
+        return file.getName().equals(rule);
     }
 }

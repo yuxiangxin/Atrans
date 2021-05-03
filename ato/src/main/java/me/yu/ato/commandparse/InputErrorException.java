@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-package me.yu.ato.parse;
+package me.yu.ato.commandparse;
 
 /**
- * 帮助
- *
  * @author yuxiangxin
- * @since 2021-04-23
+ * @since 2021-05-03
  */
-public class Help implements Command {
-    @Override
-    public void run() {
+public class InputErrorException extends IllegalArgumentException {
+    public InputErrorException(String error) {
+        this("命令输入不正确", error);
+    }
 
+    public InputErrorException(String msg, String error) {
+        super(msg + ": " + error);
     }
 }

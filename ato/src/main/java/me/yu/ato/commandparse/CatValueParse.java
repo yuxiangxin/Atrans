@@ -14,22 +14,18 @@
  * limitations under the License.
  */
 
-package me.yu.ato.parse;
+package me.yu.ato.commandparse;
 
-import java.util.List;
+import me.yu.ato.NextArray;
+import me.yu.ato.command.InputTranslate;
 
 /**
- * 转换
- *
  * @author yuxiangxin
- * @since 2021-04-23
+ * @since 2021-05-04
  */
-public class InputTranslate  {
-    private String chdir;
-    private String src;
-    private String dst;
-    private boolean catMode;
-    private List<String> matchesRegex;
-
-
+public class CatValueParse implements ValueParse {
+    @Override
+    public void parse(NextArray values, InputTranslate result) {
+        result.setCatMode(true);
+    }
 }

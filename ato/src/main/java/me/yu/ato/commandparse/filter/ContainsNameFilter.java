@@ -14,14 +14,28 @@
  * limitations under the License.
  */
 
-package me.yu.ato;
+package me.yu.ato.commandparse.filter;
+
+import java.io.File;
+import java.io.FileFilter;
+
+import me.yu.ato.utils.Utils;
 
 /**
  * @author yuxiangxin
- * @since 2021-04-18
+ * @since 2021-05-02
  */
-public class CommandParse {
-    public static Runnable parse(String[] args) {
-        return null;
+public class ContainsNameFilter implements FileFilter {
+    private String contain;
+
+    public ContainsNameFilter(String rule) {
+        this.contain = rule;
+    }
+
+    @Override
+    public boolean accept(File file) {
+        String fileName = file.getName();
+        String simpleName = file.getName().substring(0, Utils.getDefault(fileName.indexOf("."), -1, fileName.length()));
+        return simpleName.contains(contain);
     }
 }

@@ -14,13 +14,24 @@
  * limitations under the License.
  */
 
-package me.yu.ato.parse;
+package me.yu.ato.commandparse.filter;
+
+import java.io.File;
+import java.io.FileFilter;
 
 /**
- * 输入命令解析结果
- *
  * @author yuxiangxin
- * @since 2021-04-23
+ * @since 2021-05-02
  */
-public interface Command extends Runnable {
+public class ExtFilter implements FileFilter {
+    private String regex;
+
+    public ExtFilter(String rule) {
+        this.regex = rule.replace("*.", ".+");
+    }
+
+    @Override
+    public boolean accept(File file) {
+        return file.getName().matches(regex);
+    }
 }
