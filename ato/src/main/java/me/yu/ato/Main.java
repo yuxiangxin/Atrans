@@ -16,8 +16,8 @@
 
 package me.yu.ato;
 
+import me.yu.ato.command.CommandParse;
 import me.yu.ato.command.InputTranslate;
-import me.yu.ato.commandparse.CommandParse;
 
 /**
  * ATO转换入口
@@ -26,21 +26,27 @@ import me.yu.ato.commandparse.CommandParse;
  * @since 2021-04-18
  */
 public class Main {
+
+    public static boolean DEBUG = true;
+
     public static void main(String[] args) {
         System.out.println("The java code already execute!" + "main");
-        /*
-        1.识别,
-        2.转换
-         */
         try {
             InputTranslate parse = CommandParse.parse(args);
         } catch (Exception e) {
-            e.printStackTrace();
             System.out.println(formatGuide(e));
         }
     }
 
     private static String formatGuide(Exception e) {
         return e.getMessage();
+    }
+
+    public static void handlerException(RuntimeException exception) {
+        if (DEBUG) {
+            throw exception;
+        } else {
+            exception.printStackTrace();
+        }
     }
 }

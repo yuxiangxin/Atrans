@@ -14,28 +14,30 @@
  * limitations under the License.
  */
 
-package me.yu.ato.commandparse.filter;
+package me.yu.ato.translate;
 
-import java.io.File;
-import java.io.FileFilter;
+import com.alibaba.fastjson.JSON;
 
-import me.yu.ato.utils.Utils;
+import org.dom4j.Element;
+
+import java.util.Iterator;
+
+import me.yu.ato.translate.bean.StringArrayBean;
 
 /**
  * @author yuxiangxin
- * @since 2021-05-02
+ * @since 2021-05-06
  */
-public class ContainsNameFilter implements FileFilter {
-    private String contain;
-
-    public ContainsNameFilter(String rule) {
-        this.contain = rule;
-    }
-
+public class ArrayElementParser extends AbsElementParser {
     @Override
-    public boolean accept(File file) {
-        String fileName = file.getName();
-        String simpleName = file.getName().substring(0, Utils.getDefault(fileName.indexOf("."), -1, fileName.length()));
-        return simpleName.contains(contain);
+    public String translate(String name, Element element) {
+        StringArrayBean array = new StringArrayBean();
+        array.setName(name);
+        Iterator<Element> iterator = element.elementIterator();
+        while (iterator.hasNext()) {
+            Element stuChild = iterator.next();
+            array.addValue(stuChild.getText());
+        }
+        return JSON.toJSONString(array);
     }
 }

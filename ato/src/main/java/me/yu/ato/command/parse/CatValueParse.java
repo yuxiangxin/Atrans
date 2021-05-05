@@ -14,24 +14,18 @@
  * limitations under the License.
  */
 
-package me.yu.ato.commandparse.filter;
+package me.yu.ato.command.parse;
 
-import java.io.File;
-import java.io.FileFilter;
+import me.yu.ato.utils.NextArray;
+import me.yu.ato.command.InputTranslate;
 
 /**
  * @author yuxiangxin
- * @since 2021-05-02
+ * @since 2021-05-04
  */
-public class EqualsFilter implements FileFilter {
-    private String rule;
-
-    public EqualsFilter(String rule) {
-        this.rule = rule;
-    }
-
+public class CatValueParse implements ValueParse {
     @Override
-    public boolean accept(File file) {
-        return file.getName().equals(rule);
+    public void parse(NextArray values, InputTranslate result) {
+        result.setCatMode(true);
     }
 }

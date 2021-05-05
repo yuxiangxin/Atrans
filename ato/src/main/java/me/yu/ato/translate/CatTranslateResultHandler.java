@@ -14,22 +14,27 @@
  * limitations under the License.
  */
 
-package me.yu.ato.utils;
+package me.yu.ato.translate;
+
+import java.io.IOException;
 
 /**
- * 日志打印
- *
  * @author yuxiangxin
- * @since 2021-04-23
+ * @since 2021-05-05
  */
-public class LogUtils {
-
-    public static void v(String tag, String format, Object... value) {
-        v(tag, String.format(format, value));
+public class CatTranslateResultHandler implements TranslateResultHandler {
+    @Override
+    public void append(String translate) throws IOException {
+        System.out.println(translate);
     }
 
-    public static void v(String tag, String msg) {
-        System.out.println(tag + " : " + msg);
+    @Override
+    public void done() throws IOException {
+
     }
 
+    @Override
+    public void close() throws IOException {
+
+    }
 }

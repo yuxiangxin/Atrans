@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-package me.yu.ato.commandparse;
+package me.yu.ato.translate;
+
+import java.io.Closeable;
+import java.io.IOException;
 
 /**
  * @author yuxiangxin
- * @since 2021-05-03
+ * @since 2021-05-05
  */
-public class InputErrorException extends IllegalArgumentException {
-    public InputErrorException(String error) {
-        this("命令输入不正确", error);
-    }
+public interface TranslateResultHandler extends Closeable {
+    void append(String translate) throws IOException;
 
-    public InputErrorException(String msg, String error) {
-        super(msg + ": " + error);
-    }
+    void done() throws IOException;
 }

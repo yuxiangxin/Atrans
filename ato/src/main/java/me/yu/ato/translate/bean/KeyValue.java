@@ -14,22 +14,37 @@
  * limitations under the License.
  */
 
-package me.yu.ato.utils;
+package me.yu.ato.translate.bean;
 
 /**
- * 日志打印
- *
  * @author yuxiangxin
- * @since 2021-04-23
+ * @since 2021-05-04
  */
-public class LogUtils {
+public class KeyValue<K, V> {
+    private K name;
+    private V value;
 
-    public static void v(String tag, String format, Object... value) {
-        v(tag, String.format(format, value));
+    public KeyValue() {
     }
 
-    public static void v(String tag, String msg) {
-        System.out.println(tag + " : " + msg);
+    public KeyValue(K key, V value) {
+        this.name = key;
+        this.value = value;
     }
 
+    public K getName() {
+        return name;
+    }
+
+    public void setName(K name) {
+        this.name = name;
+    }
+
+    public V getValue() {
+        return value;
+    }
+
+    public void setValue(V value) {
+        this.value = value;
+    }
 }

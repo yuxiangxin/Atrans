@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package me.yu.ato.commandparse.filter;
+package me.yu.ato.command.parse.filter;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -23,15 +23,15 @@ import java.io.FileFilter;
  * @author yuxiangxin
  * @since 2021-05-02
  */
-public class ExtFilter implements FileFilter {
-    private String regex;
+public class EqualsFilter implements FileFilter {
+    private String rule;
 
-    public ExtFilter(String rule) {
-        this.regex = rule.replace("*.", ".+");
+    public EqualsFilter(String rule) {
+        this.rule = rule;
     }
 
     @Override
     public boolean accept(File file) {
-        return file.getName().matches(regex);
+        return file.getName().equals(rule);
     }
 }

@@ -14,22 +14,24 @@
  * limitations under the License.
  */
 
-package me.yu.ato.utils;
+package me.yu.ato.command.parse.filter;
+
+import java.io.File;
+import java.io.FileFilter;
 
 /**
- * 日志打印
- *
  * @author yuxiangxin
- * @since 2021-04-23
+ * @since 2021-05-02
  */
-public class LogUtils {
+public class ExtFilter implements FileFilter {
+    private String regex;
 
-    public static void v(String tag, String format, Object... value) {
-        v(tag, String.format(format, value));
+    public ExtFilter(String rule) {
+        this.regex = rule.replace("*.", ".+");
     }
 
-    public static void v(String tag, String msg) {
-        System.out.println(tag + " : " + msg);
+    @Override
+    public boolean accept(File file) {
+        return file.getName().matches(regex);
     }
-
 }

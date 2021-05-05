@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package me.yu.ato.commandparse;
+package me.yu.ato.command.parse;
 
-import me.yu.ato.NextArray;
+import me.yu.ato.utils.NextArray;
 import me.yu.ato.command.InputTranslate;
 import me.yu.ato.utils.LogUtils;
 

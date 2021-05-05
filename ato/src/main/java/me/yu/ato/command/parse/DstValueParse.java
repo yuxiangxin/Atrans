@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package me.yu.ato.commandparse;
+package me.yu.ato.command.parse;
 
 import java.io.File;
 
-import me.yu.ato.NextArray;
+import me.yu.ato.command.InputErrorException;
+import me.yu.ato.utils.NextArray;
 import me.yu.ato.command.InputTranslate;
 
 /**
@@ -38,11 +39,11 @@ public class DstValueParse implements ValueParse {
         if (!saveFile.exists()) {
             boolean mkdirs = saveFile.mkdirs();
             if (!mkdirs) {
-                throw new CannotParseException("保存目录创建失败!", value);
+                throw new InputErrorException("保存目录创建失败!", value);
             }
         }
         if (!saveFile.canWrite()) {
-            throw new CannotParseException("保存目录无写入权限!", value);
+            throw new InputErrorException("保存目录无写入权限!", value);
         }
         result.setDst(value);
     }

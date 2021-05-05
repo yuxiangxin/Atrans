@@ -24,5 +24,6 @@ java {
 }
 
 dependencies {
-    implementation files('libs/xpp3-1.1.4c.jar')
+    implementation files('libs/dom4j-2.1.3.jar')
+    implementation files('libs\\fastjson-1.2.76.jar')
 }

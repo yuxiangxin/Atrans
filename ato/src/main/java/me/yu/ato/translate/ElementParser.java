@@ -14,22 +14,23 @@
  * limitations under the License.
  */
 
-package me.yu.ato.utils;
+package me.yu.ato.translate;
+
+import org.dom4j.Element;
 
 /**
- * 日志打印
- *
  * @author yuxiangxin
- * @since 2021-04-23
+ * @since 2021-05-05
  */
-public class LogUtils {
+public interface ElementParser {
+    String ELEMENT_TYPE_STRING = "string";
+    String ELEMENT_TYPE_ARRAY = "array";
+    String ELEMENT_TYPE_BOOLEAN = "bool";
+    String ELEMENT_TYPE_COLOR = "color";
+    String ELEMENT_TYPE_DIMEN = "dimen";
+    String ELEMENT_TYPE_INTEGER = "integer";
 
-    public static void v(String tag, String format, Object... value) {
-        v(tag, String.format(format, value));
-    }
+    String ATTRIBUTE_NAME = "name";
 
-    public static void v(String tag, String msg) {
-        System.out.println(tag + " : " + msg);
-    }
-
+    String translate(Element element);
 }

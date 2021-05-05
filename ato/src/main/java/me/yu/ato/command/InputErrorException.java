@@ -14,22 +14,18 @@
  * limitations under the License.
  */
 
-package me.yu.ato.utils;
+package me.yu.ato.command;
 
 /**
- * 日志打印
- *
  * @author yuxiangxin
- * @since 2021-04-23
+ * @since 2021-05-03
  */
-public class LogUtils {
-
-    public static void v(String tag, String format, Object... value) {
-        v(tag, String.format(format, value));
+public class InputErrorException extends IllegalArgumentException {
+    public InputErrorException(String error) {
+        this("命令输入不正确", error);
     }
 
-    public static void v(String tag, String msg) {
-        System.out.println(tag + " : " + msg);
+    public InputErrorException(String msg, String error) {
+        super(msg + ": " + error);
     }
-
 }

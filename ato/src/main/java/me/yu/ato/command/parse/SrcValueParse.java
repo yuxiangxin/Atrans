@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package me.yu.ato.commandparse;
+package me.yu.ato.command.parse;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -22,11 +22,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import me.yu.ato.NextArray;
+import me.yu.ato.command.CannotParseException;
+import me.yu.ato.command.InputErrorException;
+import me.yu.ato.utils.NextArray;
 import me.yu.ato.command.InputTranslate;
-import me.yu.ato.commandparse.filter.ContainsNameFilter;
-import me.yu.ato.commandparse.filter.EqualsFilter;
-import me.yu.ato.commandparse.filter.ExtFilter;
+import me.yu.ato.command.parse.filter.ContainsNameFilter;
+import me.yu.ato.command.parse.filter.EqualsFilter;
+import me.yu.ato.command.parse.filter.ExtFilter;
 import me.yu.ato.utils.IoUtils;
 
 /**
@@ -44,7 +46,7 @@ public class SrcValueParse implements ValueParse {
         String path = values.next().get();
         File srcFile = new File(path);
         if (!srcFile.exists()) {
-            throw new CannotParseException("目标文件不存在, 请确认输入是否正确", path);
+            throw new InputErrorException("目标文件不存在, 请确认输入是否正确", path);
         }
         // 目标文件或目录
         if (srcFile.isDirectory()) {
@@ -56,7 +58,7 @@ public class SrcValueParse implements ValueParse {
                     String[] rules = input.split(",");
                     filters.addAll(toFilter(rules));
                 } else if (!nextValue.startsWith("/")) {
-                    throw new CannotParseException("此处输入不正确", nextValue);
+                    throw new InputErrorException("此处输入不正确", nextValue);
                 } else {
                     values.move(-1);
                 }

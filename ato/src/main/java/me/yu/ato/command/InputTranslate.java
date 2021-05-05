@@ -80,7 +80,10 @@ public class InputTranslate {
                 ", dst='" + dst + '\'' +
                 ", isCatMode=" + isCatMode +
                 ", isHelpMode=" + isHelpMode +
-                ", src=\n" + src.toString().replace(",", ",\n") + " size:" + src.size() +
+                src != null ?
+                ", src=\n" + src.toString().replace(",", ",\n") + " size:" + src.size()
+                : ""
+                +
                 '}';
     }
 }

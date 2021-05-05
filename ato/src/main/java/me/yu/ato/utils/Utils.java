@@ -16,6 +16,8 @@
 
 package me.yu.ato.utils;
 
+import java.util.Collection;
+
 /**
  * 工具类
  *
@@ -33,6 +35,10 @@ public class Utils {
 
     public static boolean isEmpty(String[] value) {
         return value == null || value.length == 0;
+    }
+
+    public static boolean isEmpty(Collection<?> collections) {
+        return collections == null || collections.isEmpty();
     }
 
     public static <T> T getDefault(T value, T checkValue, T defValue) {

@@ -14,22 +14,25 @@
  * limitations under the License.
  */
 
-package me.yu.ato.utils;
+package me.yu.ato.translate;
+
+import org.dom4j.Element;
 
 /**
- * 日志打印
+ * 不支持解析异常
  *
  * @author yuxiangxin
- * @since 2021-04-23
+ * @since 2021-05-05
  */
-public class LogUtils {
-
-    public static void v(String tag, String format, Object... value) {
-        v(tag, String.format(format, value));
+public class UnSupportTranslateType extends RuntimeException {
+    public UnSupportTranslateType() {
     }
 
-    public static void v(String tag, String msg) {
-        System.out.println(tag + " : " + msg);
+    public UnSupportTranslateType(String message) {
+        super(message);
     }
 
+    public UnSupportTranslateType(Element element) {
+        this("不支持解析:" + element.getName());
+    }
 }

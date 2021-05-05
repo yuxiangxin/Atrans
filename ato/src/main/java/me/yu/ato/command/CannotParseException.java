@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-package me.yu.ato.commandparse;
-
-import me.yu.ato.NextArray;
-import me.yu.ato.command.InputTranslate;
+package me.yu.ato.command;
 
 /**
+ * 解析异常
+ *
  * @author yuxiangxin
- * @since 2021-05-04
+ * @since 2021-04-26
  */
-public class CatValueParse implements ValueParse {
-    @Override
-    public void parse(NextArray values, InputTranslate result) {
-        result.setCatMode(true);
+public class CannotParseException extends RuntimeException {
+
+    public CannotParseException(String message, String error) {
+        super(message + ": " + error);
     }
 }

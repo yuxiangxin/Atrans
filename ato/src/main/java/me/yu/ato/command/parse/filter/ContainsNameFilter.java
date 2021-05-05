@@ -14,22 +14,28 @@
  * limitations under the License.
  */
 
-package me.yu.ato.utils;
+package me.yu.ato.command.parse.filter;
+
+import java.io.File;
+import java.io.FileFilter;
+
+import me.yu.ato.utils.Utils;
 
 /**
- * 日志打印
- *
  * @author yuxiangxin
- * @since 2021-04-23
+ * @since 2021-05-02
  */
-public class LogUtils {
+public class ContainsNameFilter implements FileFilter {
+    private String contain;
 
-    public static void v(String tag, String format, Object... value) {
-        v(tag, String.format(format, value));
+    public ContainsNameFilter(String rule) {
+        this.contain = rule;
     }
 
-    public static void v(String tag, String msg) {
-        System.out.println(tag + " : " + msg);
+    @Override
+    public boolean accept(File file) {
+        String fileName = file.getName();
+        String simpleName = file.getName().substring(0, Utils.getDefault(fileName.indexOf("."), -1, fileName.length()));
+        return simpleName.contains(contain);
     }
-
 }

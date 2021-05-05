@@ -14,22 +14,16 @@
  * limitations under the License.
  */
 
-package me.yu.ato.utils;
+package me.yu.ato.translate;
 
 /**
- * 日志打印
- *
  * @author yuxiangxin
- * @since 2021-04-23
+ * @since 2021-05-06
  */
-public class LogUtils {
-
-    public static void v(String tag, String format, Object... value) {
-        v(tag, String.format(format, value));
+public class DimenElementParser extends ItemKeyValueElementParser {
+    @Override
+    protected String modifyValue(String value) {
+        return value.replace("dp", "vp").replace("sp", "fp")
+                .replace("DP", "VP").replace("SP", "FP");
     }
-
-    public static void v(String tag, String msg) {
-        System.out.println(tag + " : " + msg);
-    }
-
 }

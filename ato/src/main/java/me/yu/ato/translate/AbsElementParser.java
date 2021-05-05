@@ -14,22 +14,24 @@
  * limitations under the License.
  */
 
-package me.yu.ato.utils;
+package me.yu.ato.translate;
+
+import org.dom4j.Attribute;
+import org.dom4j.Element;
 
 /**
- * 日志打印
- *
  * @author yuxiangxin
- * @since 2021-04-23
+ * @since 2021-05-06
  */
-public class LogUtils {
-
-    public static void v(String tag, String format, Object... value) {
-        v(tag, String.format(format, value));
+public abstract class AbsElementParser implements ElementParser {
+    @Override
+    public String translate(Element element) {
+        Attribute nameAttr = element.attribute(ATTRIBUTE_NAME);
+        if (nameAttr != null) {
+            return translate(nameAttr.getText(), element);
+        }
+        throw new TranslateException("Can match attribute name!");
     }
 
-    public static void v(String tag, String msg) {
-        System.out.println(tag + " : " + msg);
-    }
-
+    public abstract String translate(String name, Element element);
 }

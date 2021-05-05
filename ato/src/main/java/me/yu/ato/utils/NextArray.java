@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package me.yu.ato;
+package me.yu.ato.utils;
 
 /**
  * 顺序取值的数组

@@ -14,17 +14,21 @@
  * limitations under the License.
  */
 
-package me.yu.ato.commandparse;
+package me.yu.ato.translate;
 
 /**
- * 解析异常
- *
  * @author yuxiangxin
- * @since 2021-04-26
+ * @since 2021-05-05
  */
-public class CannotParseException extends RuntimeException {
+public class TranslateException extends RuntimeException {
+    public TranslateException() {
+    }
 
-    public CannotParseException(String message, String error) {
-        super(message + ": " + error);
+    public TranslateException(String message) {
+        super(message);
+    }
+
+    public TranslateException(Throwable cause) {
+        super(cause);
     }
 }

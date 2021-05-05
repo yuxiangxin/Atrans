@@ -14,14 +14,19 @@
  * limitations under the License.
  */
 
-package me.yu.ato.commandparse;
+package me.yu.ato.command;
 
 
 import java.util.HashMap;
 import java.util.Map;
 
-import me.yu.ato.NextArray;
-import me.yu.ato.command.InputTranslate;
+import me.yu.ato.command.parse.CatValueParse;
+import me.yu.ato.command.parse.DstValueParse;
+import me.yu.ato.command.parse.HelpValueParse;
+import me.yu.ato.command.parse.SrcValueParse;
+import me.yu.ato.command.parse.ValueParse;
+import me.yu.ato.utils.NextArray;
+import me.yu.ato.utils.Utils;
 
 /**
  * @author yuxiangxin
@@ -65,9 +70,18 @@ public class CommandParse {
                 if (current.startsWith("/")) {
                     throw new CannotParseException("无对应解析器, 请检查输入是否正确 ", current);
                 } else {
-                    throw new InputErrorException("未知内容, 请检查输入 ", current);
+                    throw new CannotParseException("未知内容, 请检查输入 ", current);
                 }
             }
+        }
+        if (Utils.isEmpty(command.getSrc())) {
+            throw new InputErrorException("未输入目标文件");
+        }
+        if (command.isCatMode() && command.getDst() != null) {
+            throw new InputErrorException("/C 和 /D 不能同时存在");
+        }
+        if (command.getDst() == null) {
+            command.setDst(chdir);
         }
         return command;
     }
