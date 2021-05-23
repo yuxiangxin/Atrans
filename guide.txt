@@ -1,0 +1,22 @@
+Android xml文件转换为Harmony处理器 {version}
+Android项目string.xml,color.xml key-value资源文件,Layout布局文件和shape select样式xml转换为Harmony项目对应文件
+
+使用指南: atrans [/help] [/src path <filter>] [/dst dir] [/cat]
+
+    /help   查看使用帮助, (或 /?, /h)
+    /src    指定要转换的文件路径或目录
+                当src 为目录时表示匹配该目录下所有文件, 设置<filter>可以过滤文件, 如[string.xml,color.xml]
+                表明匹配指定目录下文件名为string.xml,color.xml文件
+                示例: /src ./res/ [string.xml,main_layout.xml]
+
+                当src为文件时, 不可输入<filter>
+                示例 /src ./res/value/string.xml
+    /dst    指定转换结果保存目录, 不可指定保存文件名, 此命令和/cat冲突
+    /cat    打印转换结果, 此命令和/dst冲突
+
+示例:
+    1. 转换并打印string.xml文件
+       atrans /src ./res/value/string.xml /cat
+
+    2. 转换并将转换结果保存至value2目录下
+        atrans /src ./res/value/string.xml /dst ./res/value2

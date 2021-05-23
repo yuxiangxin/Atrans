@@ -1,0 +1,72 @@
+import java.text.SimpleDateFormat
+
+plugins {
+    id 'java-library'
+    id 'com.github.johnrengelman.shadow' version '2.0.4'
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+group 'org.xiangxin'
+version '1.0'
+
+ext {
+    baseJarName = 'atrans-command'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+    compileOnly 'org.projectlombok:lombok:1.18.16'
+    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+
+    compile project(':translate')
+}
+
+shadowJar {
+    baseName = baseJarName
+    from("../") {
+        include 'guide.txt'
+    }
+    manifest {
+        attributes 'Main-Class': 'org.xiangxin.atrans.command.Main'
+    }
+}
+
+task generateCommand() {
+    String rem = String.format("@ECHO OFF\n" +
+            "REM Atrans(Android xml translate to Harmony) start bat\n" +
+            "REM Version: v%s\n" +
+            "REM Build date: %s\n\n"
+            , version, SimpleDateFormat.dateInstance.format(System.currentTimeMillis()));
+    StringBuilder contentBuilder = new StringBuilder(rem)
+            .append("JAVA -jar .\\")
+            .append(String.format("%s-%s.jar", baseJarName, version))
+            .append(" %cd% ");
+    for (int i = 1; i < 10; i++) {
+        contentBuilder.append("%").append(i).append(" ");
+    }
+    contentBuilder.append("\n")
+    File commandFile = file(buildDir.toString() + "/libs/atrans.bat");
+    if (commandFile.exists()) {
+        commandFile.delete();
+    }
+    commandFile.write(contentBuilder.toString())
+}
+
+task anotherCopyTask(type: Copy) {
+    from '../key_value_parser_config.xml'
+    from '../reply_rule_config.xml'
+    into buildDir.toString() + "/libs/"
+}
+
+test {
+    useJUnitPlatform()
+}

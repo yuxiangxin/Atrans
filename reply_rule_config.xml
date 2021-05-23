@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rule>
+    <!--示例
+    <cast name="NotNull" src="NotNull" ignoreCase="[true|false] deflate:false" mode="[equals|contains] deflate:contains">
+        NotNull
+    </cast>
+    -->
+
+    <reply name="elementName" src="View">Component</reply>
+    <reply name="elementName" src="LinearLayout">MyRuleLayout</reply>
+
+    <reply name="attributeName" src="layout_width">width</reply>
+    <reply name="attributeName" src="layout_height">height</reply>
+    <reply name="attributeName" src="background">backgroundElement</reply>
+
+    <reply name="attributeValue" src="@+id/">$+id:</reply>
+    <reply name="attributeValue" src="dp" ignoreCase="true">vp</reply>
+    <reply name="attributeValue" src="fp" ignoreCase="true">sp</reply>
+    <reply name="attributeValue" src="wrap_content" ignoreCase="true">match_content</reply>
+
+    <reply name="namespacePrefix" src="android">ohos</reply>
+
+    <reply name="namespaceURI" src="http://schemas.android.com/apk/res-auto" mode="equals">
+        http://schemas.huawei.com/res/ohos-auto
+    </reply>
+
+    <reply name="namespaceURI" src="http://schemas.android.com/apk/res-auto" mode="contains">
+        http://schemas.huawei.com/res/ohos-auto
+    </reply>
+</rule>
