@@ -48,13 +48,14 @@ public class ParserLoader {
     private static final String STRING_TYPE = "type";
     private static final String STRING_REPLY = "reply";
     public static final String STRING_TRUE = "true";
-    public static final String STRING_FALSE = "true";
+    public static final String STRING_FALSE = "false";
 
     private static final String TYPE_OBJECT = "object";
     private static final String TYPE_ARRAY = "array";
 
-    public static final String MODE_CONTAINS = "contains";
-    public static final String MODE_WORD = "word";
+    public static final String MODE_CONTAINS_MATCH = "contains_match";
+    public static final String MODE_WORD_ALL = "word_all";
+    public static final String MODE_CONTAINS_ALL = "contains_all";
 
     private static final ItemParser ITEM_PARSER = loadItemParser(BuildConfig.KEY_VALUE_PATH);
 

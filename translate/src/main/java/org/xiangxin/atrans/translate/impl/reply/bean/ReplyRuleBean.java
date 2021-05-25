@@ -34,7 +34,7 @@ public class ReplyRuleBean implements Value {
     private String name;
     @Reply(defaultValue = ParserLoader.STRING_FALSE)
     private String ignoreCase;
-    @Reply(defaultValue = ParserLoader.MODE_CONTAINS)
+    @Reply(defaultValue = ParserLoader.MODE_CONTAINS_MATCH)
     private String mode;
     @Reply(checkNull = true)
     private String src;
@@ -45,47 +45,74 @@ public class ReplyRuleBean implements Value {
     private NodeItemValue nodeItemValue;
 
     @Override
-    public boolean isValid() {
+    public boolean isValid () {
         return !Utils.isEmpty(name) && !Utils.isEmpty(value);
     }
 
     @Override
-    public void apply() {
+    public void apply () {
         if (!isValid()) {
-            throw new IllegalArgumentException("The name or value uninitialized:" + name + " " + value);
+            throw new IllegalArgumentException("The name or value not initialized:" + name + " " + value);
         }
         boolean isIgnoreCase = ParserLoader.STRING_TRUE.equals(ignoreCase);
-
-        if (ParserLoader.MODE_WORD.equals(mode)) {
-            if (isIgnoreCase) {
-                nodeItemValue = new IgnoreCaseWordMatchValue(src, value);
-            } else {
-                nodeItemValue = new WordMatchValue(src, value);
+        if (isIgnoreCase) {
+            switch (mode) {
+                case ParserLoader.MODE_WORD_ALL:
+                    nodeItemValue = new IgnoreCaseWordAllValue(src, value);
+                    break;
+                case ParserLoader.MODE_CONTAINS_MATCH:
+                    nodeItemValue = new IgnoreCaseContainsMatchValue(src, value);
+                    break;
+                case ParserLoader.MODE_CONTAINS_ALL:
+                    nodeItemValue = new IgnoreCaseContainsAllValue(src, value);
+                    break;
+                default:
+                    throwModeErrorException();
             }
         } else {
-            if (isIgnoreCase) {
-                nodeItemValue = new IgnoreCaseContainsValue(src, value);
-            } else {
-                nodeItemValue = new ContainsValue(src, value);
+            switch (mode) {
+                case ParserLoader.MODE_WORD_ALL:
+                    nodeItemValue = new WordAllValue(src, value);
+                    break;
+                case ParserLoader.MODE_CONTAINS_MATCH:
+                    nodeItemValue = new ContainsMatchValue(src, value);
+                    break;
+                case ParserLoader.MODE_CONTAINS_ALL:
+                    nodeItemValue = new ContainsAllValue(src, value);
+                    break;
+                default:
+                    throwModeErrorException();
             }
         }
     }
 
-    public String reply(String content) {
+    private void throwModeErrorException () {
+        String inMode = String.format(
+                "[%s|%s|%s]",
+                ParserLoader.MODE_CONTAINS_MATCH,
+                ParserLoader.MODE_CONTAINS_ALL,
+                ParserLoader.MODE_WORD_ALL
+        );
+        throw new IllegalArgumentException("替换模式不正确 " + element.asXML() + "  mode:" + mode + " 不正确,必须为:" + inMode);
+    }
+
+    public String reply (String content) {
         if (nodeItemValue != null && nodeItemValue.isMatch(content)) {
             return nodeItemValue.reply(content);
         }
         return content;
     }
-
-    public static void main(String[] args) {
+//    <reply name="attributeValue" src="@+id/" mode="contains_match">$+id:</reply>
+//    <reply name="attributeValue" src="@id/" mode="contains_match">$id:</reply>
+    public static void main (String[] args) {
         ReplyRuleBean test = new ReplyRuleBean();
         test.setName("elementValue");
-        test.setSrc("dp");
-        test.setValue("vp");
-        test.setIgnoreCase("true");
-        test.setMode(ParserLoader.MODE_WORD);
-        String reply = test.reply("111dp");
+        test.setSrc("@+id/");
+        test.setValue("$+id:");
+        //test.setIgnoreCase("true");
+        test.setMode(ParserLoader.MODE_CONTAINS_MATCH);
+        test.apply();
+        String reply = test.reply("@+id/reply_ll");
         LogUtils.v("TAG", "" + reply);
     }
 }

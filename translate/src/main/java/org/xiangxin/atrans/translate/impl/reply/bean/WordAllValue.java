@@ -22,8 +22,8 @@ import java.util.Objects;
  * @author yuxiangxin
  * @since 2021-05-22
  */
-public class WordMatchValue extends AbsNodeItemValue {
-    public WordMatchValue(String src, String value) {
+public class WordAllValue extends AbsNodeItemValue {
+    public WordAllValue (String src, String value) {
         super(src, value);
     }
 

@@ -11,12 +11,14 @@ Android项目string.xml,color.xml key-value资源文件,Layout布局文件和sha
 
                 当src为文件时, 不可输入<filter>
                 示例 /src ./res/value/string.xml
-    /dst    指定转换结果保存目录, 不可指定保存文件名, 此命令和/cat冲突
+    /dst    指定转换结果保存目录, 不可指定保存文件名, 此命令和/cat冲突, 可为空,默认当前目录
     /cat    打印转换结果, 此命令和/dst冲突
 
 示例:
     1. 转换并打印string.xml文件
        atrans /src ./res/value/string.xml /cat
 
-    2. 转换并将转换结果保存至value2目录下
-        atrans /src ./res/value/string.xml /dst ./res/value2
+    2. 转换并将转换结果保存至当前目录下
+        atrans /src ./res/value/string.xml
+
+配置文件说明 see: https://github.com/yuxiangxin/Atrans

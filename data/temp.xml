@@ -1,10 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <rule>
-    <!--示例<reply name="NotNull" src="NotNull" ignoreCase="[true|false] deflate:false" mode="[contains_match|word_all|contains_all] deflate:contains_match"> NotNull </reply>-->
-    <reply name="namespacePrefix" src="android">ohos</reply>
-    <reply name="namespaceURI" src="http://schemas.android.com/apk/res/android" mode="word_all">http://schemas.huawei.com/res/ohos</reply>
-    <reply name="namespaceURI" src="http://schemas.android.com/apk/res-auto" mode="word_all">http://schemas.huawei.com/res/ohos-auto</reply>
-
     <reply name="elementName" src="View" mode="word_all">Component</reply>
     <reply name="elementName" src="SurfaceView" mode="word_all">SurfaceProvider</reply>
     <reply name="elementName" src="GLSurfaceView" mode="word_all">SurfaceProvider</reply>
@@ -51,7 +46,6 @@
     <reply name="elementName" src="AutoCompleteTextView" mode="word_all">TextField</reply>
     <reply name="elementName" src="AppCompatAutoCompleteTextView" mode="contains_all">TextField</reply>
 
-    <reply name="attributeName" src="gravity" mode="word_all">alignment</reply>
     <reply name="attributeName" src="layout_gravity" mode="word_all">layout_alignment</reply>
     <reply name="attributeName" src="textSize" mode="word_all">text_size</reply>
     <reply name="attributeName" src="src" mode="word_all">image_src</reply>
@@ -124,20 +118,12 @@
     <reply name="attributeName" src="scaleY" mode="word_all">scale_y</reply>
     <reply name="attributeName" src="translationX" mode="word_all">translation_x</reply>
     <reply name="attributeName" src="translationY" mode="word_all">translation_y</reply>
-    <reply name="attributeName" src="ellipsize" mode="word_all">truncation_mode</reply>
 
-    <reply name="attributeValue" src="@color/" mode="contains_match">$color:</reply>
-    <reply name="attributeValue" src="@drawable/" mode="contains_match">$graphic:</reply>
-    <reply name="attributeValue" src="@string/" mode="contains_match">$string:</reply>
-    <reply name="attributeValue" src="@dimen/" mode="contains_match">$float:</reply>
-    <reply name="attributeValue" src="@bool/" mode="contains_match">$boolean:</reply>
-    <reply name="attributeValue" src="@array/" mode="contains_match">$strarray:</reply>
-    <reply name="attributeValue" src="@layout/" mode="contains_match">$layout:</reply>
     <reply name="attributeValue" src="@+id/" mode="contains_match">$+id:</reply>
     <reply name="attributeValue" src="@id/" mode="contains_match">$id:</reply>
-    <reply name="attributeValue" src="dp" ignoreCase="true" mode="contains_match">vp</reply>
-    <reply name="attributeValue" src="sp" ignoreCase="true" mode="contains_match">fp</reply>
-    <reply name="attributeValue" src="dip" ignoreCase="true" mode="contains_match">vp</reply>
+    <reply name="attributeValue" src="dp" mode="contains_match">vp</reply>
+    <reply name="attributeValue" src="fp" mode="contains_match">sp</reply>
+    <reply name="attributeValue" src="dip" mode="contains_match">vp</reply>
     <reply name="attributeValue" src="fitCenter" mode="word_all">zoom_center</reply>
     <reply name="attributeValue" src="fitStart" mode="word_all">zoom_start</reply>
     <reply name="attributeValue" src="fitEnd" mode="word_all">zoom_end</reply>
@@ -148,9 +134,7 @@
     <reply name="attributeValue" src="middle" mode="word_all">ellipsis_at_middle</reply>
     <reply name="attributeValue" src="end" mode="word_all">ellipsis_at_end</reply>
     <reply name="attributeValue" src="marquee" mode="word_all">auto_scrolling</reply>
-    <reply name="attributeValue" src="fill_parent" mode="word_all">match_parent</reply>
+    <reply name="attributeValue" src="fill_parent" mode="word_all">match_content</reply>
     <reply name="attributeValue" src="wrap_content" mode="word_all">match_content</reply>
     <reply name="attributeValue" src="gone" mode="word_all">hide</reply>
-    <reply name="attributeValue" src="center_vertical" mode="contains_match">vertical_center</reply>
-    <reply name="attributeValue" src="center_horizontal" mode="contains_match">horizontal_center</reply>
 </rule>

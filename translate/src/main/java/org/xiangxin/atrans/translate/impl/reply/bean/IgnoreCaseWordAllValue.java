@@ -18,20 +18,23 @@ package org.xiangxin.atrans.translate.impl.reply.bean;
 
 /**
  * @author yuxiangxin
- * @since 2021-05-20
+ * @since 2021-05-23
  */
-public class ContainsValue extends AbsNodeItemValue {
-    public ContainsValue(String src, String value) {
+public class IgnoreCaseWordAllValue extends AbsNodeItemValue {
+    private String upperSrc;
+
+    public IgnoreCaseWordAllValue (String src, String value) {
         super(src, value);
+        this.upperSrc = src;
     }
 
     @Override
     public boolean isMatch(String value) {
-        return value.contains(getSrc());
+        return upperSrc.equals(value.toUpperCase());
     }
 
     @Override
     public String reply(String value) {
-        return value.replaceAll(getSrc(), getValue());
+        return getValue();
     }
 }

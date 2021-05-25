@@ -23,10 +23,10 @@ import java.util.regex.Pattern;
  * @author yuxiangxin
  * @since 2021-05-23
  */
-public class IgnoreCaseContainsValue extends AbsNodeItemValue {
+public class IgnoreCaseContainsMatchValue extends AbsNodeItemValue {
     private String upperSrc;
 
-    public IgnoreCaseContainsValue(String src, String value) {
+    public IgnoreCaseContainsMatchValue (String src, String value) {
         super(src, value);
         upperSrc = src.toUpperCase();
     }

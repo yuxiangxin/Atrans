@@ -29,8 +29,10 @@ public class Main {
     public static boolean DEBUG = true;
 
     public static void main (String[] args) {
-        //String params = "1 /s C:\\SimpleWowo\\wowoandroid-androidstudio\\app\\src\\main\\res\\values\\strings.xml /c";
-        //args = params.split(" ");
+        //String path = "C:\\SimpleWowo\\wowoandroid-androidstudio\\app\\src\\main\\res\\values\\strings.xml";
+        String path = "C:\\SimpleWowo\\wowoandroid-androidstudio\\app\\src\\main\\res\\layout\\activity_my_invitation.xml";
+        String params = "1 /s " + path + " /c";
+        args = params.split(" ");
         try {
             CommandParse.parse(args).run();
         } catch (Exception e) {
