@@ -23,18 +23,20 @@ import org.xiangxin.atrans.utils.Utils;
 import java.util.List;
 
 /**
+ * reply解析器加载
+ *
  * @author yuxiangxin
  * @since 2021-05-23
  */
 public class RuleReplyImpl implements XmlReply {
     private final List<ReplyRuleBean> attrReplyRule;
 
-    public RuleReplyImpl(List<ReplyRuleBean> attrReplyRule) {
+    public RuleReplyImpl (List<ReplyRuleBean> attrReplyRule) {
         this.attrReplyRule = attrReplyRule;
     }
 
     @Override
-    public void reply(Element element) {
+    public void reply (Element element) {
         if (attrReplyRule != null) {
             attrReplyRule.forEach(replyRuleBean -> {
                 String name = replyRuleBean.getName();
@@ -62,7 +64,7 @@ public class RuleReplyImpl implements XmlReply {
     }
 
     @Override
-    public String replyNamespacePrefix(String namespacePrefix) {
+    public String replyNamespacePrefix (String namespacePrefix) {
         if (namespacePrefix == null) {
             return null;
         }
@@ -76,7 +78,7 @@ public class RuleReplyImpl implements XmlReply {
     }
 
     @Override
-    public String replyNamespaceURI(String namespaceURI) {
+    public String replyNamespaceURI (String namespaceURI) {
         if (namespaceURI == null) {
             return null;
         }

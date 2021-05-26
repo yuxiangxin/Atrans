@@ -25,6 +25,6 @@ package org.xiangxin.atrans;
 public interface BuildConfig {
     String VERSION = "V1.0";
     String RUN_PATH = System.getProperty("user.dir");
-    String KEY_VALUE_PATH = RUN_PATH + "\\key_value_parser_config.xml";
+    String KEY_VALUE_PATH = RUN_PATH + "\\json_parser_config.xml";
     String REPLY_RULE_PATH = RUN_PATH + "\\reply_rule_config.xml";
 }

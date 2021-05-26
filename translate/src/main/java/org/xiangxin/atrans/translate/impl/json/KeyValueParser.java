@@ -17,6 +17,7 @@
 package org.xiangxin.atrans.translate.impl.json;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -34,17 +35,21 @@ public class KeyValueParser implements XmlTranslate {
     private final ItemParser parser = ParserLoader.getItemParser();
 
     @Override
-    public String translate(Document document) {
+    public String translate (Document document) {
         Element rootElement = document.getRootElement();
         ArrayList<Object> arrayList = new ArrayList<>();
+        String[] keyName = {"object"};
         rootElement.elements().forEach(element -> {
             String elementName = element.getName();
             if (parser.isSupport(elementName)) {
+                keyName[0] = parser.getName(elementName);
                 arrayList.add(parser.parserElement(elementName, element));
             } else {
-                LogUtils.e(TAG, "Ignore parser element with name:" + element.asXML());
+                LogUtils.e(TAG, "Skip parser element with name:" + element.asXML());
             }
         });
-        return JSON.toJSONString(arrayList);
+        JSONObject object = new JSONObject();
+        object.fluentPut(keyName[0], arrayList);
+        return JSON.toJSONString(object);
     }
 }

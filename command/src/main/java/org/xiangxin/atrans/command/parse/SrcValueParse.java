@@ -16,7 +16,7 @@
 
 package org.xiangxin.atrans.command.parse;
 
-import org.xiangxin.atrans.command.CannotParseException;
+import org.xiangxin.atrans.command.CommandParseException;
 import org.xiangxin.atrans.command.Command;
 import org.xiangxin.atrans.command.InputErrorException;
 import org.xiangxin.atrans.command.parse.filter.ContainsNameFilter;
@@ -95,7 +95,7 @@ public class SrcValueParse implements ValueParse {
             } else if (rule.matches(".+\\..+")) {
                 filters.add(new EqualsFilter(rule));
             } else {
-                throw new CannotParseException("规则暂不支持!", rule);
+                throw new CommandParseException("规则暂不支持!", rule);
             }
         }
         return filters;

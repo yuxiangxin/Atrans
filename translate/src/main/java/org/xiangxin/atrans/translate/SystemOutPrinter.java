@@ -27,7 +27,9 @@ import java.io.IOException;
 public class SystemOutPrinter implements Printer {
     @Override
     public void println (String content) {
-        System.out.println(content);
+        System.out.println("------------------------------------\n");
+        System.out.println(content + "\n");
+        System.out.println("------------------------------------\n");
     }
 
     @Override

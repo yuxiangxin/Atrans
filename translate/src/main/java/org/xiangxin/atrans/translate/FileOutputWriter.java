@@ -21,6 +21,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
+ * 文件写入处理者
+ *
  * @author yuxiangxin
  * @since 2021-05-23
  */

@@ -49,6 +49,16 @@ public class Utils {
         return Utils.isEmpty(value) ? defValue : value;
     }
 
+    public static boolean isIn (String id, String... in) {
+        if (isEmpty(id) || in == null || in.length == 0)
+            return false;
+        for (int i = 0; i < in.length; i++) {
+            if (id.equals(in[i]))
+                return true;
+        }
+        return false;
+    }
+
     public static String getNotNull (String... value) {
         if (value == null || value.length == 0) {
             return null;

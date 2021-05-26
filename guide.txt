@@ -21,4 +21,5 @@ Android项目string.xml,color.xml key-value资源文件,Layout布局文件和sha
     2. 转换并将转换结果保存至当前目录下
         atrans /src ./res/value/string.xml
 
-配置文件说明 see: https://github.com/yuxiangxin/Atrans
+注意:
+    1. 输入不能包含空格

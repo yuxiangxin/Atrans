@@ -19,9 +19,17 @@ package org.xiangxin.atrans.translate;
 import org.dom4j.Document;
 
 /**
+ * AndroidXml doc解析接口
+ *
  * @author yuxiangxin
  * @since 2021-05-22
  */
 public interface XmlTranslate {
-    String translate(Document document);
+    /**
+     * 将Android xml转换为Harmony json或xmlString
+     *
+     * @param document android xml doc
+     * @return Harmony json或xmlString
+     */
+    String translate (Document document);
 }

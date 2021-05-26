@@ -8,5 +8,5 @@
 .cxx
 local.properties
 .idea
-make
+data
 dom4j-2.1.3-sources.jar

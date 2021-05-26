@@ -22,6 +22,8 @@ import org.xiangxin.atrans.translate.impl.json.KeyValueParser;
 import org.xiangxin.atrans.translate.impl.reply.ReplyTranslator;
 
 /**
+ * 解析器创建
+ *
  * @author yuxiangxin
  * @since 2021-05-23
  */
@@ -29,14 +31,34 @@ public class XmlTranslateFactory {
     private static final String STRING_RESOURCES = "resources";
 
     public static XmlTranslate createTranslator (Document document) {
+        return createTranslator(document, Parser.AUTO);
+    }
+
+    public static XmlTranslate createTranslator (Document document, Parser useParser) {
         Element rootElement = document.getRootElement();
         if (rootElement == null) {
             throw new IllegalArgumentException();
         }
-        if (STRING_RESOURCES.equals(rootElement.getName())) {
-            return new KeyValueParser();
+        if (Parser.AUTO.equals(useParser)) {
+            if (STRING_RESOURCES.equals(rootElement.getName())) {
+                return new KeyValueParser();
+            } else {
+                return new ReplyTranslator();
+            }
         } else {
-            return new ReplyTranslator();
+            return useParser.parser;
+        }
+    }
+
+    public enum Parser {
+        AUTO(null),
+        JSON(new KeyValueParser()),
+        REPLY(new ReplyTranslator());
+
+        private XmlTranslate parser;
+
+        Parser (XmlTranslate parser) {
+            this.parser = parser;
         }
     }
 }

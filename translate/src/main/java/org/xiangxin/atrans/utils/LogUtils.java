@@ -23,17 +23,22 @@ package org.xiangxin.atrans.utils;
  * @since 2021-04-23
  */
 public class LogUtils {
+    private static final boolean ENABLE_TAG = false;
+
+    private static String appendTag (String tag) {
+        return ENABLE_TAG ? (tag + " : ") : "";
+    }
 
     public static void v (String tag, String format, Object... value) {
-        System.out.println(tag + " : " + appendMsg(format, value));
+        System.out.println(appendTag(tag) + appendMsg(format, value));
     }
 
     public static void i (String tag, String format, Object... value) {
-        System.out.println(tag + " : " + appendMsg(format, value));
+        System.out.println(appendTag(tag) + appendMsg(format, value));
     }
 
     public static void e (String tag, String format, Object... value) {
-        System.err.println(tag + " : " + appendMsg(format, value));
+        System.err.println(appendTag(tag) + appendMsg(format, value));
     }
 
     private static String appendMsg (String format, Object[] value) {

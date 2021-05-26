@@ -28,6 +28,7 @@ public class NextArray {
 
     public NextArray(String[] values) {
         this.values = values;
+
     }
 
     public boolean hasNext() {

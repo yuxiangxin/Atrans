@@ -20,8 +20,6 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.io.SAXReader;
 import org.xiangxin.atrans.translate.extend.AndroidXmlDocumentFactory;
-import org.xiangxin.atrans.translate.impl.json.ParserLoader;
-import org.xiangxin.atrans.translate.impl.reply.ReplyRuleLoader;
 import org.xiangxin.atrans.utils.CloseableUtils;
 import org.xiangxin.atrans.utils.LogUtils;
 
@@ -43,8 +41,11 @@ public class Interpreter {
         this.printer = printer;
     }
 
-    public void translate () {
-        checkLoader();
+    public void translate (String parser) {
+        translate(parser == null ? XmlTranslateFactory.Parser.AUTO : XmlTranslateFactory.Parser.valueOf(parser));
+    }
+
+    public void translate (XmlTranslateFactory.Parser parser) {
         SAXReader reader = new SAXReader();
         reader.setDocumentFactory(new AndroidXmlDocumentFactory());
         Document document = null;
@@ -52,10 +53,11 @@ public class Interpreter {
         String result = null;
         try {
             document = reader.read(src);
-            translator = XmlTranslateFactory.createTranslator(document);
+            translator = XmlTranslateFactory.createTranslator(document, parser);
             if (translator == null) {
                 throw new UnSupportTranslateType(document.getName());
             }
+            LogUtils.v("Interpreter", "Matched XmlTranslate: " + translator.getClass().getSimpleName() + ", Printer: " + printer.getClass().getSimpleName() + "\n");
             result = translator.translate(document);
             printer.println(result);
         } catch (DocumentException | IOException e) {
@@ -66,19 +68,12 @@ public class Interpreter {
         }
     }
 
-    private void checkLoader () {
-        ParserLoader.getItemParser();
-        ReplyRuleLoader.getReplyImpl();
-    }
-
-
     public static void main (String[] args) {
-        String base = "C:\\SimpleWowo\\wowoandroid-androidstudio\\app\\src\\main\\res";
+        String base = "\\app\\src\\main\\res";
         String layoutName = base + "\\layout";
         String valuesName = base + "\\values";
         File stringXml = new File(valuesName, "strings.xml"); // dimens strings
-
-        File layoutPath = new File(layoutName, "activity_account_mgr.xml"); // activity_about activity_account_mgr
-        new Interpreter(stringXml, new SystemOutPrinter()).translate();
+        File layoutPath = new File(layoutName, "activity.xml"); // activity_about activity_account_mgr
+        new Interpreter(stringXml, new SystemOutPrinter()).translate(XmlTranslateFactory.Parser.AUTO);
     }
 }

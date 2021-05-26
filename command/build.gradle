@@ -10,7 +10,7 @@ apply plugin: 'idea'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 group 'org.xiangxin'
-version '1.0'
+version '1.0-SNAPSHOT'
 
 ext {
     baseJarName = 'atrans-command'
@@ -62,7 +62,7 @@ task generateCommand() {
 }
 
 task anotherCopyTask(type: Copy) {
-    from '../key_value_parser_config.xml'
+    from '../json_parser_config.xml'
     from '../reply_rule_config.xml'
     into buildDir.toString() + "/libs/"
 }

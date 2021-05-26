@@ -25,6 +25,8 @@ import java.util.Map;
 
 
 /**
+ * cmd命令识别.解析
+ *
  * @author yuxiangxin
  * @since 2021-05-03
  */
@@ -35,6 +37,7 @@ public class CommandParse {
     public static final String COMMAND_CAT_REGEX = "^/(?i)(c|cat)";
     public static final String COMMAND_DST_REGEX = "^/(?i)(d|dst)";
     public static final String COMMAND_SRC_REGEX = "^/(?i)(s|src)";
+    public static final String COMMAND_PARSER_REGEX = "^/(?i)(p|parser)";
 
     private static final Map<String, ValueParse> PARSE_MAP = new HashMap<String, ValueParse>() {
         {
@@ -42,11 +45,12 @@ public class CommandParse {
             put(COMMAND_CAT_REGEX, new CatValueParse());
             put(COMMAND_DST_REGEX, new DstValueParse());
             put(COMMAND_SRC_REGEX, new SrcValueParse());
+            put(COMMAND_PARSER_REGEX, new ParserValueParse());
         }
     };
 
     public static Runnable parse (String[] args) {
-        if (args == null || args.length < 1) {
+        if (args == null || args.length <= 1) {
             throw new IllegalArgumentException();
         }
         final Command command = new Command();
@@ -65,10 +69,13 @@ public class CommandParse {
                 }
             }
             if (!parsed) {
+                if (Utils.isTrimEmpty(current)) {
+                    continue;
+                }
                 if (current.startsWith("/")) {
-                    throw new CannotParseException("无对应解析器, 请检查输入是否正确 ", current);
+                    throw new CommandParseException("未知命令, 请检查输入是否正确 ", current);
                 } else {
-                    throw new CannotParseException("未知内容, 请检查输入 ", current);
+                    throw new CommandParseException("未知内容, 请检查输入 ", current);
                 }
             }
         }

@@ -23,6 +23,8 @@ import org.xiangxin.atrans.utils.LogUtils;
 import java.io.InputStream;
 
 /**
+ * 使用指南打印任务
+ *
  * @author yuxiangxin
  * @since 2021-05-23
  */

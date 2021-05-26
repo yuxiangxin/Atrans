@@ -45,6 +45,7 @@ public class ParserLoader {
     private static final String TAG = "ParserLoader";
     private static final String STRING_PARSE = "parse";
     private static final String STRING_NAME = "name";
+    private static final String STRING_JSON_KEY = "jsonKey";
     private static final String STRING_TYPE = "type";
     private static final String STRING_REPLY = "reply";
     public static final String STRING_TRUE = "true";
@@ -59,11 +60,11 @@ public class ParserLoader {
 
     private static final ItemParser ITEM_PARSER = loadItemParser(BuildConfig.KEY_VALUE_PATH);
 
-    public static ItemParser getItemParser() {
+    public static ItemParser getItemParser () {
         return ITEM_PARSER;
     }
 
-    private static ItemParser loadItemParser(String path) {
+    private static ItemParser loadItemParser (String path) {
         SAXReader reader = new SAXReader();
         Document document;
         try {
@@ -73,6 +74,7 @@ public class ParserLoader {
             HashMap<String, ItemParser> parserHashMap = new HashMap<>();
             rootElement.elements(STRING_PARSE).forEach(element -> {
                 String itemName = element.attributeValue(STRING_NAME);
+                String jsonKey = element.attributeValue(STRING_JSON_KEY, itemName);
                 if (itemName == null) {
                     LogUtils.e(TAG, "Invalid parser item:" + element.asXML());
                     return;
@@ -95,9 +97,9 @@ public class ParserLoader {
                 RuleReplyImpl ruleReply = replyRules == null ? null : new RuleReplyImpl(replyRules);
                 String type = element.attributeValue(STRING_TYPE, TYPE_OBJECT);
                 if (TYPE_OBJECT.equals(type)) {
-                    itemParser = new KeyValueParserImpl(ruleReply);
+                    itemParser = new KeyValueParserImpl(jsonKey, ruleReply);
                 } else if (TYPE_ARRAY.equals(type)) {
-                    itemParser = new ArrayParserImpl(ruleReply);
+                    itemParser = new ArrayParserImpl(jsonKey, ruleReply);
                 } else {
                     LogUtils.e(TAG, "Invalid parse type:" + element.asXML());
                     return;
@@ -110,42 +112,52 @@ public class ParserLoader {
             return new ItemParserImpl(parserHashMap);
         } catch (DocumentException e) {
             e.printStackTrace();
-            throw new LoadException("解析器加载错误,请检查配置文件是否存在." + e.getMessage());
+            throw new LoadException("解析器加载错误,请检查配置文件是否正确." + e.getMessage());
         }
     }
 
     private static class ItemParserImpl implements ItemParser {
         private final HashMap<String, ItemParser> parserHashMap;
 
-        public ItemParserImpl(HashMap<String, ItemParser> parserHashMap) {
+        public ItemParserImpl (HashMap<String, ItemParser> parserHashMap) {
             this.parserHashMap = parserHashMap;
         }
 
         @Override
-        public boolean isSupport(String elementName) {
+        public boolean isSupport (String elementName) {
             return parserHashMap.containsKey(elementName);
         }
 
         @Override
-        public Object parserElement(String elementName, Element element) {
+        public Object parserElement (String elementName, Element element) {
             return parserHashMap.get(elementName).parserElement(elementName, element);
+        }
+
+        @Override
+        public String getName (String itemName) {
+            if (parserHashMap.containsKey(itemName)) {
+                return parserHashMap.get(itemName).getName(itemName);
+            }
+            return "objects";
         }
     }
 
     private static class KeyValueParserImpl implements ItemParser {
+        private final String jsonKey;
         private final XmlReply xmlReply;
 
-        public KeyValueParserImpl(XmlReply xmlReply) {
+        public KeyValueParserImpl (String parserName, XmlReply xmlReply) {
             this.xmlReply = xmlReply;
+            this.jsonKey = parserName;
         }
 
         @Override
-        public boolean isSupport(String elementName) {
+        public boolean isSupport (String elementName) {
             return true;
         }
 
         @Override
-        public Object parserElement(String elementName, Element element) {
+        public Object parserElement (String elementName, Element element) {
             if (xmlReply != null) {
                 xmlReply.reply(element);
             }
@@ -153,22 +165,29 @@ public class ParserLoader {
             String value = element.getText();
             return new KeyValue<>(key, value);
         }
+
+        @Override
+        public String getName (String rootElementName) {
+            return jsonKey;
+        }
     }
 
     private static class ArrayParserImpl implements ItemParser {
+        private final String jsonKey;
         private final XmlReply xmlReply;
 
-        public ArrayParserImpl(XmlReply xmlReply) {
+        public ArrayParserImpl (String parserName, XmlReply xmlReply) {
             this.xmlReply = xmlReply;
+            this.jsonKey = parserName;
         }
 
         @Override
-        public boolean isSupport(String elementName) {
+        public boolean isSupport (String elementName) {
             return false;
         }
 
         @Override
-        public Object parserElement(String elementName, Element element) {
+        public Object parserElement (String elementName, Element element) {
             if (xmlReply != null) {
                 xmlReply.reply(element);
             }
@@ -181,6 +200,11 @@ public class ParserLoader {
                 array.addValue(stuChild.getText());
             }
             return array;
+        }
+
+        @Override
+        public String getName (String rootElementName) {
+            return jsonKey;
         }
     }
 }

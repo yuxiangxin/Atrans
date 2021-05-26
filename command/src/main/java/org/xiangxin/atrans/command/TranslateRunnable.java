@@ -43,12 +43,12 @@ public class TranslateRunnable implements Runnable {
         List<File> src = command.getSrc();
         for (File file : src) {
             try {
+                System.out.println(file.getName());
                 File dst = new File(file.getParent(), "atrans_" + file.getName());
-                new Interpreter(file, isCat ? new SystemOutPrinter() : new FileOutputWriter(dst)).translate();
-                if (isCat) {
-                    System.out.println("转换已完成");
-                } else {
-                    System.out.println("转换结束, 结果保存至: " + dst.getPath());
+                new Interpreter(file, isCat ? new SystemOutPrinter() : new FileOutputWriter(dst)).translate(command.getParser());
+                System.out.print(file.getName() + "转换已完成");
+                if (!isCat) {
+                    System.out.println(", 结果保存至: " + dst.getPath());
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);

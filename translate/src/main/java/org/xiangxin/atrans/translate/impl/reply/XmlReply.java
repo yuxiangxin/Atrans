@@ -19,6 +19,8 @@ package org.xiangxin.atrans.translate.impl.reply;
 import org.dom4j.Element;
 
 /**
+ * Element对象替换
+ *
  * @author yuxiangxin
  * @since 2021-05-23
  */
@@ -30,9 +32,9 @@ public interface XmlReply {
     String NAMESPACE_URI = "namespaceURI";
     String NAMESPACE_PREFIX = "namespacePrefix";
 
-    void reply(Element element);
+    void reply (Element element);
 
-    String replyNamespacePrefix(String namespacePrefix);
+    String replyNamespacePrefix (String namespacePrefix);
 
-    String replyNamespaceURI(String namespaceURI);
+    String replyNamespaceURI (String namespaceURI);
 }

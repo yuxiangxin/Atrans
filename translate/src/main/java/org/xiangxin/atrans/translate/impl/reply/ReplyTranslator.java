@@ -22,6 +22,8 @@ import org.dom4j.Element;
 import org.xiangxin.atrans.translate.XmlTranslate;
 
 /**
+ * xml转换replyImpl
+ *
  * @author yuxiangxin
  * @since 2021-05-22
  */
@@ -30,13 +32,13 @@ public class ReplyTranslator implements XmlTranslate {
     private static final XmlReply REPLY_IMPL = ReplyRuleLoader.getReplyImpl();
 
     @Override
-    public String translate(Document document) {
+    public String translate (Document document) {
         Element rootElement = document.getRootElement();
         replyElement(rootElement);
         return document.asXML();
     }
 
-    public void replyElement(Element element) {
+    public void replyElement (Element element) {
         REPLY_IMPL.reply(element);
         element.elements().forEach(this::replyElement);
     }

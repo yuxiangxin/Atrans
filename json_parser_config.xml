@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <parser>
-    <parse name="dimen" type="object">
+    <parse name="dimen" jsonKey="float" type="object">
         <reply name="attributeValue" src="dp" ignoreCase="true" mode="contains_match">vp</reply>
         <reply name="attributeValue" src="sp" ignoreCase="true" mode="contains_match">fp</reply>
         <reply name="attributeValue" src="dip" ignoreCase="true" mode="contains_match">vp</reply>
     </parse>
     <parse name="string" type="object" />
-    <parse name="bool" type="object" />
+    <parse name="bool" jsonKey="boolean" type="object" />
     <parse name="color" type="object" />
-    <parse name="integer" type="object" />
-    <parse name="array" type="array" />
+    <parse name="integer" jsonKey="float" type="object" />
+    <parse name="array" jsonKey="strarray" type="array" />
 </parser>

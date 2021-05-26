@@ -23,7 +23,9 @@ import org.dom4j.Element;
  * @since 2021-05-22
  */
 public interface ItemParser {
-    boolean isSupport(String elementName);
+    boolean isSupport (String elementName);
 
-    Object parserElement(String elementName, Element element);
+    Object parserElement (String elementName, Element element);
+
+    String getName (String rootElementName);
 }

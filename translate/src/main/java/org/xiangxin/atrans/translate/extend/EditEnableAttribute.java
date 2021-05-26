@@ -21,6 +21,8 @@ import org.dom4j.QName;
 import org.dom4j.tree.AbstractAttribute;
 
 /**
+ * 可编辑AttrName的Attribute
+ *
  * @author yuxiangxin
  * @since 2021-05-18
  */
@@ -28,52 +30,52 @@ public class EditEnableAttribute extends AbstractAttribute {
     private QName qname;
     private String value;
 
-    public EditEnableAttribute(QName qname) {
+    public EditEnableAttribute (QName qname) {
         this.qname = qname;
     }
 
-    public EditEnableAttribute(QName qname, String value) {
+    public EditEnableAttribute (QName qname, String value) {
         this.qname = qname;
         this.value = value;
     }
 
-    public EditEnableAttribute(String name, String value) {
+    public EditEnableAttribute (String name, String value) {
         this.qname = getDocumentFactory().createQName(name);
         this.value = value;
     }
 
-    public EditEnableAttribute(String name, String value, Namespace namespace) {
+    public EditEnableAttribute (String name, String value, Namespace namespace) {
         this.qname = getDocumentFactory().createQName(name, namespace);
         this.value = value;
     }
 
     @Override
-    public QName getQName() {
+    public QName getQName () {
         return qname;
     }
 
     @Override
-    public void setNamespace(Namespace namespace) {
+    public void setNamespace (Namespace namespace) {
         this.qname = getDocumentFactory().createQName(qname.getName(), namespace);
     }
 
     @Override
-    public String getValue() {
+    public String getValue () {
         return value;
     }
 
     @Override
-    public void setName(String name) {
+    public void setName (String name) {
         this.qname = getDocumentFactory().createQName(name, qname.getNamespace());
     }
 
     @Override
-    public String asXML() {
+    public String asXML () {
         return super.asXML();
     }
 
     @Override
-    public void setValue(String value) {
+    public void setValue (String value) {
         this.value = value;
     }
 }

@@ -22,9 +22,8 @@ package org.xiangxin.atrans.command;
  * @author yuxiangxin
  * @since 2021-04-26
  */
-public class CannotParseException extends RuntimeException {
-
-    public CannotParseException(String message, String error) {
+public class CommandParseException extends RuntimeException {
+    public CommandParseException (String message, String error) {
         super(message + ": " + error);
     }
 }

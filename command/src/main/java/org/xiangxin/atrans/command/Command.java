@@ -17,7 +17,6 @@
 package org.xiangxin.atrans.command;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,31 +24,26 @@ import lombok.Data;
 
 
 /**
- * 转换
+ * atrans cmd命令转换对象
  *
  * @author yuxiangxin
  * @since 2021-04-23
  */
 @Data
 public class Command {
+    public static final String PARSER_AUTO = "AUTO";
+    public static final String PARSER_JSON = "JSON";
+    public static final String PARSER_REPLY = "REPLY";
+
     private String chdir;
     private List<File> src = new ArrayList<>();
     private String dst;
     private boolean isCatMode;
     private boolean isHelpMode;
+    private String parser;
 
     @Override
     public String toString () {
         return ", src=\n" + src.toString().replace(",", ",\n") + " size:" + src.size();
-    }
-
-    public void run () throws IOException {
-        if (isHelpMode) {
-            System.out.println("使用帮助");
-        } else {
-            for (File file : src) {
-
-            }
-        }
     }
 }

@@ -19,7 +19,6 @@ package org.xiangxin.atrans.translate.impl.reply.bean;
 import org.dom4j.Element;
 import org.xiangxin.atrans.translate.impl.json.ParserLoader;
 import org.xiangxin.atrans.translate.impl.reply.Reply;
-import org.xiangxin.atrans.utils.LogUtils;
 import org.xiangxin.atrans.utils.Utils;
 
 import lombok.Data;
@@ -101,18 +100,5 @@ public class ReplyRuleBean implements Value {
             return nodeItemValue.reply(content);
         }
         return content;
-    }
-//    <reply name="attributeValue" src="@+id/" mode="contains_match">$+id:</reply>
-//    <reply name="attributeValue" src="@id/" mode="contains_match">$id:</reply>
-    public static void main (String[] args) {
-        ReplyRuleBean test = new ReplyRuleBean();
-        test.setName("elementValue");
-        test.setSrc("@+id/");
-        test.setValue("$+id:");
-        //test.setIgnoreCase("true");
-        test.setMode(ParserLoader.MODE_CONTAINS_MATCH);
-        test.apply();
-        String reply = test.reply("@+id/reply_ll");
-        LogUtils.v("TAG", "" + reply);
     }
 }
