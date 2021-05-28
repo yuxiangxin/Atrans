@@ -62,8 +62,8 @@ task generateCommand() {
 }
 
 task anotherCopyTask(type: Copy) {
-    from '../json_parser_config.xml'
-    from '../reply_rule_config.xml'
+    from '../json_parse_config.xml'
+    from '../reply_parse_config.xml'
     into buildDir.toString() + "/libs/"
 }
 

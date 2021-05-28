@@ -16,8 +16,8 @@
 
 package org.xiangxin.atrans.command.parse;
 
-import org.xiangxin.atrans.command.CommandParseException;
 import org.xiangxin.atrans.command.Command;
+import org.xiangxin.atrans.command.CommandParseException;
 import org.xiangxin.atrans.command.InputErrorException;
 import org.xiangxin.atrans.command.parse.filter.ContainsNameFilter;
 import org.xiangxin.atrans.command.parse.filter.EqualsFilter;
@@ -43,6 +43,9 @@ public class SrcValueParse implements ValueParse {
     @Override
     public void parse (NextArray values, Command result) {
         List<File> srcList = new ArrayList<>();
+        if (!values.hasNext()) {
+            throw new InputErrorException("此处命令后需接文件路径或目录", values.get());
+        }
         String path = values.next().get();
         File srcFile = new File(path);
         if (!srcFile.exists()) {

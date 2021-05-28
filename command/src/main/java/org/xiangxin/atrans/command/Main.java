@@ -17,26 +17,25 @@
 package org.xiangxin.atrans.command;
 
 import org.xiangxin.atrans.utils.LogUtils;
+import org.xiangxin.atrans.utils.Utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Translate command启动入口
- * 负责将atrans.bat传来的参数处理, 再由解析器解析运行
+ * 负责将atrans.bat传来的参数处理, 再解析运行
  *
  * @author yuxiangxin
  * @since 2021-04-18
  */
 public class Main {
     private static final String TAG = "Main";
-    public static boolean DEBUG = true;
+    private final static boolean DEBUG = true;
 
     public static void main (String[] args) {
-        String path = "C:\\SimpleWowo\\wowoandroid-androidstudio\\app\\src\\main\\res\\values [strings, color] /p22 auto";
-        String params = "1 /s " + path + " /c";
-        args = params.split(" ");
-
+        //String params = "1 /s 111 ";
+        //args = params.split(" ");
         try {
             CommandParse.parse(clearFilterSpace(args)).run();
         } catch (Exception e) {
@@ -60,9 +59,11 @@ public class Main {
         int argsSize = args.length;
         for (int i = 0; i < argsSize; i++) {
             String each = args[i];
-            stringBuilder.append(each);
-            if (i + 1 <= argsSize) {
-                stringBuilder.append(itemAppend);
+            if (!Utils.isTrimEmpty(each)) {
+                stringBuilder.append(each);
+                if (i + 1 <= argsSize) {
+                    stringBuilder.append(itemAppend);
+                }
             }
         }
         String argsString = stringBuilder.toString();
