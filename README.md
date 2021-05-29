@@ -8,8 +8,8 @@ Atrans(Android xml translate) Android项目layout drawable resources xml资源�
 1. 下载 [atrans.zip](extend/atrans.zip), 解压缩至任意目录
 2. 新建环境变量, 变量名为**atranspath** ,变量值为改目录,再添加**;%atranspath%**到path变量中
    ![添加环境变量](./extend/addToPath.png)
-3. 打开命令行cmd窗口, 键入 trans /?, 如提示使用指南则表示配置成功, 否则检查变量配置
-   ![添加环境变量](./extend/atrans_guide.png.png)
+3. 打开命令行cmd窗口, 键入 trans /?, 如提示使用使用帮助指南则表示配置成功, 否则需要检查变量配置是否正确
+   ![添加环境变量](./extend/atrans_guide.png)
 
 ### 它的工作原理
 
@@ -63,4 +63,4 @@ name属性值对应xml元素内容
 
 ### License
 
-Apache 2.0, See the [LICENSE](./README.md) file for details.
+Apache 2.0, See the [LICENSE](./LICENSE) file for details.
