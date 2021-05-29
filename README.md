@@ -61,7 +61,7 @@ name属性值对应xml元素内容
 </parser>
  ```
 
-*atrans作为独立的功能模块, 你可以基于此library实现idea插件*
+*translate作为独立的功能模块, 你可以基于此library实现idea插件*
 
 ### License
 
