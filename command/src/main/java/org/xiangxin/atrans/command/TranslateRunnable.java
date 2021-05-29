@@ -21,7 +21,6 @@ import org.xiangxin.atrans.translate.Interpreter;
 import org.xiangxin.atrans.translate.SystemOutPrinter;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -50,7 +49,7 @@ public class TranslateRunnable implements Runnable {
                 if (!isCat) {
                     System.out.println(", 结果保存至: " + dst.getPath());
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }

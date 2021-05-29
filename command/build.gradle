@@ -47,7 +47,7 @@ task generateCommand() {
             "REM Build date: %s\n\n"
             , version, SimpleDateFormat.dateInstance.format(System.currentTimeMillis()));
     StringBuilder contentBuilder = new StringBuilder(rem)
-            .append("JAVA -jar .\\")
+            .append("JAVA -jar %atranspath%\\")
             .append(String.format("%s-%s.jar", baseJarName, version))
             .append(" %cd% ");
     for (int i = 1; i < 10; i++) {
@@ -64,6 +64,7 @@ task generateCommand() {
 task anotherCopyTask(type: Copy) {
     from '../json_parse_config.xml'
     from '../reply_parse_config.xml'
+    from '../README.md'
     into buildDir.toString() + "/libs/"
 }
 
