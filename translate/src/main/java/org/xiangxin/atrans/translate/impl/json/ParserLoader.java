@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 package org.xiangxin.atrans.translate.impl.json;
 
 import org.dom4j.Document;
