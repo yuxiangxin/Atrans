@@ -20,7 +20,7 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.xiangxin.atrans.BuildConfig;
+import org.xiangxin.atrans.Config;
 import org.xiangxin.atrans.translate.LoadException;
 import org.xiangxin.atrans.translate.impl.json.bean.KeyValue;
 import org.xiangxin.atrans.translate.impl.json.bean.StringArrayBean;
@@ -57,7 +57,7 @@ public class ParserLoader {
     public static final String MODE_WORD_ALL = "word_all";
     public static final String MODE_CONTAINS_ALL = "contains_all";
 
-    private static final ItemParser ITEM_PARSER = loadItemParser(BuildConfig.KEY_VALUE_PATH);
+    private static final ItemParser ITEM_PARSER = loadItemParser(Config.get().getJsonParseConfigFile());
 
     public static ItemParser getItemParser () {
         return ITEM_PARSER;

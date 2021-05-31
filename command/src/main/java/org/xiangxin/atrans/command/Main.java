@@ -16,9 +16,11 @@
 
 package org.xiangxin.atrans.command;
 
+import org.xiangxin.atrans.Config;
 import org.xiangxin.atrans.utils.LogUtils;
 import org.xiangxin.atrans.utils.Utils;
 
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,24 +35,38 @@ public class Main {
     private static final String TAG = "Main";
     private final static boolean DEBUG = true;
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         //String params = "1 /s 111 ";
         //args = params.split(" ");
+        if (args == null && args.length != 1) {
+            String atransPath = args[0];
+            Properties properties = new Properties();
+            properties.setProperty(Config.ATRANS_PATH, atransPath);
+            properties.setProperty(Config.ENABLE_DEBUG_LOG, DEBUG + "");
+            Config.get().config(properties);
+            String[] newArgs = new String[args.length - 1];
+            System.arraycopy(args, 1, new String[args.length - 1], 0, args.length - 1);
+            args = newArgs;
+        } else {
+            throw new IllegalArgumentException("第一个参数固定为atranspath,请从atrans.bat启动");
+        }
+
         try {
+
             CommandParse.parse(clearFilterSpace(args)).run();
         } catch (Exception e) {
             formatGuide(e);
         }
     }
 
-    private static void formatGuide (Exception e) {
-        //if (e instanceof IllegalArgumentException) {
+    private static void formatGuide(Exception e) {
         LogUtils.i(TAG, "命令语法不正确, 键入 trans /? 以查看帮助");
-        //}
-        e.printStackTrace();
+        if (DEBUG) {
+            e.printStackTrace();
+        }
     }
 
-    private static String[] clearFilterSpace (String[] args) {
+    private static String[] clearFilterSpace(String[] args) {
         if (args == null || args.length == 0) {
             return null;
         }

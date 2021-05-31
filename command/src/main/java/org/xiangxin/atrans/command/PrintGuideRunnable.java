@@ -16,7 +16,7 @@
 
 package org.xiangxin.atrans.command;
 
-import org.xiangxin.atrans.BuildConfig;
+import org.xiangxin.atrans.Config;
 import org.xiangxin.atrans.utils.IoUtils;
 import org.xiangxin.atrans.utils.LogUtils;
 
@@ -37,7 +37,7 @@ public class PrintGuideRunnable implements Runnable {
             InputStream stream = PrintGuideRunnable.class
                     .getClassLoader().getResourceAsStream("guide.txt");
             String guideContent = IoUtils.getContent(stream);
-            guideContent = guideContent.replaceFirst("\\{version}", "version:" + BuildConfig.VERSION);
+            guideContent = guideContent.replaceFirst("\\{version}", "version:" + Config.VERSION);
             System.out.println(guideContent);
         } catch (Exception e) {
             LogUtils.e(TAG, "使用指南文件丢失!");

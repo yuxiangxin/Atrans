@@ -20,7 +20,7 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.xiangxin.atrans.BuildConfig;
+import org.xiangxin.atrans.Config;
 import org.xiangxin.atrans.translate.LoadException;
 import org.xiangxin.atrans.translate.impl.reply.bean.ReplyRuleBean;
 import org.xiangxin.atrans.utils.LogUtils;
@@ -35,7 +35,7 @@ import java.util.List;
 public class ReplyRuleLoader {
     private static final String TAG = "ReplyRuleLoader";
     private static final String STRING_REPLY = "reply";
-    private static final XmlReply REPLY_IMPL = loadItemParser(BuildConfig.REPLY_RULE_PATH);
+    private static final XmlReply REPLY_IMPL = loadItemParser(Config.get().getReplyParseConfigFile());
 
     public static XmlReply getReplyImpl() {
         return REPLY_IMPL;

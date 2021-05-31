@@ -16,6 +16,8 @@
 
 package org.xiangxin.atrans.utils;
 
+import org.xiangxin.atrans.Config;
+
 /**
  * 日志打印
  *
@@ -25,23 +27,23 @@ package org.xiangxin.atrans.utils;
 public class LogUtils {
     private static final boolean ENABLE_TAG = false;
 
-    private static String appendTag (String tag) {
+    private static String appendTag(String tag) {
         return ENABLE_TAG ? (tag + " : ") : "";
     }
 
-    public static void v (String tag, String format, Object... value) {
+    public static void v(String tag, String format, Object... value) {
         System.out.println(appendTag(tag) + appendMsg(format, value));
     }
 
-    public static void i (String tag, String format, Object... value) {
+    public static void i(String tag, String format, Object... value) {
         System.out.println(appendTag(tag) + appendMsg(format, value));
     }
 
-    public static void e (String tag, String format, Object... value) {
+    public static void e(String tag, String format, Object... value) {
         System.err.println(appendTag(tag) + appendMsg(format, value));
     }
 
-    private static String appendMsg (String format, Object[] value) {
+    private static String appendMsg(String format, Object[] value) {
         if (value == null || value.length == 0) {
             return format;
         } else {
@@ -49,7 +51,9 @@ public class LogUtils {
         }
     }
 
-    public static void e (Throwable e) {
-        //e.printStackTrace();
+    public static void e(Throwable e) {
+        if (Config.get().isEnablePrintException()) {
+            e.printStackTrace();
+        }
     }
 }
