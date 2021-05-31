@@ -12,5 +12,8 @@ path=%atranspath%;
 ```
 2. 打开命令行cmd窗口, 键入 trans /?, 如提示使用使用帮助指南则表示配置成功, 否则需要检查变量配置是否正确
 
-### 问题反馈与建议
+### 详细说明&解析器配置
 https://github.com/yuxiangxin/Atrans
+
+### 问题反馈与建议
+https://github.com/yuxiangxin/Atrans/issues/new
