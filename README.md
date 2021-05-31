@@ -17,7 +17,7 @@ path=%atranspath%;
 
 ### 解析器配置
 
-![atrans架构图](./extend/atrans_01.png)
+![atrans模块](./extend/atrans_01.png)
 
 * reply转换器    
   **reply_parse_config.xml**字段说明
