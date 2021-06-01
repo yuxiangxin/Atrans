@@ -58,7 +58,7 @@ task generateCommand() {
     if (commandFile.exists()) {
         commandFile.delete();
     }
-    //commandFile.write(contentBuilder.toString())
+    commandFile.write(contentBuilder.toString())
 }
 
 task anotherCopyTask(type: Copy) {
