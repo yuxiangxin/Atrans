@@ -38,21 +38,19 @@ public class Main {
     public static void main(String[] args) {
         //String params = "1 /s 111 ";
         //args = params.split(" ");
-        if (args == null && args.length != 1) {
+        if (args != null && args.length > 1) {
             String atransPath = args[0];
             Properties properties = new Properties();
             properties.setProperty(Config.ATRANS_PATH, atransPath);
             properties.setProperty(Config.ENABLE_DEBUG_LOG, DEBUG + "");
             Config.get().config(properties);
             String[] newArgs = new String[args.length - 1];
-            System.arraycopy(args, 1, new String[args.length - 1], 0, args.length - 1);
+            System.arraycopy(args, 1, newArgs, 0, args.length - 1);
             args = newArgs;
         } else {
-            throw new IllegalArgumentException("第一个参数固定为atranspath,请从atrans.bat启动");
+            throw new IllegalArgumentException("前两个参数固定为 atranspath和当前目录; 请从atrans.bat启动");
         }
-
         try {
-
             CommandParse.parse(clearFilterSpace(args)).run();
         } catch (Exception e) {
             formatGuide(e);
