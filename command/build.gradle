@@ -49,7 +49,7 @@ task generateCommand() {
     StringBuilder contentBuilder = new StringBuilder(rem)
             .append("JAVA -jar %atranspath%\\")
             .append(String.format("%s-%s.jar", baseJarName, version))
-            .append(" %cd% %atranspath% ");
+            .append(" %atranspath% %cd% ");
     for (int i = 1; i < 10; i++) {
         contentBuilder.append("%").append(i).append(" ");
     }
