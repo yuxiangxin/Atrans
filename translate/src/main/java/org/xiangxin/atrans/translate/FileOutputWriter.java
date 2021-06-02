@@ -16,9 +16,7 @@
 
 package org.xiangxin.atrans.translate;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * 文件写入处理者
@@ -27,10 +25,10 @@ import java.io.IOException;
  * @since 2021-05-23
  */
 public class FileOutputWriter implements Printer {
-    private FileWriter writer;
+    private Writer writer;
 
     public FileOutputWriter (File out) throws IOException {
-        writer = new FileWriter(out, false);
+        writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(out), "UTF-8"));
     }
 
     @Override

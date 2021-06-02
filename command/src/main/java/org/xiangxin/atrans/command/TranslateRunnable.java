@@ -19,6 +19,7 @@ package org.xiangxin.atrans.command;
 import org.xiangxin.atrans.translate.FileOutputWriter;
 import org.xiangxin.atrans.translate.Interpreter;
 import org.xiangxin.atrans.translate.SystemOutPrinter;
+import org.xiangxin.atrans.utils.Utils;
 
 import java.io.File;
 import java.util.List;
@@ -43,7 +44,7 @@ public class TranslateRunnable implements Runnable {
         for (File file : src) {
             try {
                 System.out.println(file.getName());
-                File dst = new File(file.getParent(), "atrans_" + file.getName());
+                File dst = new File(Utils.getNotNull(command.getDst(), file.getParent()), "atrans_" + file.getName());
                 new Interpreter(file, isCat ? new SystemOutPrinter() : new FileOutputWriter(dst)).translate(command.getParser());
                 System.out.print(file.getName() + "转换已完成");
                 if (!isCat) {
