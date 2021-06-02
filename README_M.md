@@ -4,7 +4,7 @@
 Atrans(Android xml translate) Android项目layout drawable resources xml资源转Harmony对应json 或xml资源文件
 
 ### 配置环境变量 
-*为了在cmd窗口下从任意路径访问`atrans.bat`, 需要将`atrans.bat`所在目录添加到环境变量path中*.
+*为了支持在cmd窗口下从任意路径访问`atrans.bat`, 需要将`atrans.bat`所在目录添加到环境变量path中*.
 1. 新建环境变量key: `atranspath`, value: `atrans.bat所在目录`
 2. 将`%atranspath%`添加到环境变量path中
 ```path
