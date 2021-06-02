@@ -13,7 +13,7 @@ Android项目string.xml,color.xml key-value资源文件,Layout布局文件和sha
                 当src为文件时, 不可输入[filter]
                 示例 /src ./res/value/string.xml
 
-    /dst    指定转换结果保存目录, 不可指定保存文件名, 此命令和/cat冲突, 可为空,默认当前目录
+    /dst    指定转换结果保存目录, 不可指定保存文件名, 此命令和/cat冲突, 可为空,默认原文件目录
 
     /cat    打印转换结果, 此命令和/dst冲突
 
@@ -23,8 +23,8 @@ Android项目string.xml,color.xml key-value资源文件,Layout布局文件和sha
     1. 转换,打印指定文件
        atrans /s ./res/value/string.xml /c
 
-    2. 转换,保存指定文件至当前目录下
-        atrans /s ./res/value/string.xml
+    2. 转换./res/value目录下所有xml格式文件,并保存原文件目录
+        atrans /s ./res/value [*.xml]
 
     3. 转换指定目录下所有名称包含string的文件,保存至指定目录
         atrans /s ./res/ [string] /d d:/atrats/

@@ -41,7 +41,7 @@ public class Main {
             String atransPath = args[0];
             Properties properties = new Properties();
             properties.setProperty(Config.ATRANS_PATH, atransPath);
-            properties.setProperty(Config.ENABLE_DEBUG_LOG, DEBUG + "");
+            properties.setProperty(Config.ENABLE_DEBUG_LOG, "FALSE");
             Config.get().config(properties);
             String[] newArgs = new String[args.length - 1];
             System.arraycopy(args, 1, newArgs, 0, args.length - 1);
@@ -58,8 +58,12 @@ public class Main {
     }
 
     private static void formatGuide (Exception e) {
-        LogUtils.i(TAG, "命令语法不正确, 键入 trans /? 以查看帮助");
-        if (DEBUG) {
+        if (e instanceof IllegalArgumentException) {
+            LogUtils.i(TAG, "命令语法不正确, 键入 trans /? 以查看帮助");
+            if (DEBUG) {
+                e.printStackTrace();
+            }
+        } else {
             e.printStackTrace();
         }
     }

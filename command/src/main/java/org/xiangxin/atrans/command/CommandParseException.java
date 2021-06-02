@@ -22,7 +22,7 @@ package org.xiangxin.atrans.command;
  * @author yuxiangxin
  * @since 2021-04-26
  */
-public class CommandParseException extends RuntimeException {
+public class CommandParseException extends IllegalArgumentException {
     public CommandParseException (String message, String error) {
         super(message + ": " + error);
     }

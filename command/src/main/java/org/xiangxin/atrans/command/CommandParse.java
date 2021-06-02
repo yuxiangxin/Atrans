@@ -85,9 +85,6 @@ public class CommandParse {
         if (command.isCatMode() && command.getDst() != null) {
             throw new InputErrorException("/C 和 /D 不能同时存在");
         }
-        if (command.getDst() == null) {
-            command.setDst(chdir);
-        }
         if (command.isHelpMode()) {
             return new PrintGuideRunnable();
         } else {
