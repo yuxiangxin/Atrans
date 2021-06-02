@@ -3,8 +3,10 @@
 ### Atrans是什么
 Atrans(Android xml translate) Android项目layout drawable resources xml资源转Harmony对应json 或xml资源文件
 
-### 配置环境变量
-1. 新建环境变量, 变量名为**atranspath** ,变量值为改目录,再添加 **;%atranspath%** 到path变量中
+### 配置环境变量 
+*为了在cmd窗口可以从任意路径访问`atrans`, 需要将`atrans.bat`所在目录添加到环境变量path中*.
+1. 新建环境变量key:`atranspath`, value:为atrans所在目录
+2. 将`%atranspath%`添加到环境变量path中
 ```path
 atranspath=save_path\atrans
 path=%atranspath%;
