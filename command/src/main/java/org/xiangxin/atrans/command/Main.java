@@ -35,9 +35,8 @@ public class Main {
     private static final String TAG = "Main";
     private final static boolean DEBUG = true;
 
-    public static void main(String[] args) {
-        //String params = "1 /s 111 ";
-        //args = params.split(" ");
+    public static void main (String[] args) {
+        //args = input.split(" ");
         if (args != null && args.length > 1) {
             String atransPath = args[0];
             Properties properties = new Properties();
@@ -48,7 +47,8 @@ public class Main {
             System.arraycopy(args, 1, newArgs, 0, args.length - 1);
             args = newArgs;
         } else {
-            throw new IllegalArgumentException("前两个参数固定为 atranspath和当前目录; 请从atrans.bat启动");
+            String tip = "参数顺序固定为(atranspath /*jar包所在位置*/, currentDir /*当前运行目录*/, String... args /*输入参数*/)";
+            throw new IllegalArgumentException(tip + ",或请从atrans.bat启动");
         }
         try {
             CommandParse.parse(clearFilterSpace(args)).run();
@@ -57,14 +57,14 @@ public class Main {
         }
     }
 
-    private static void formatGuide(Exception e) {
+    private static void formatGuide (Exception e) {
         LogUtils.i(TAG, "命令语法不正确, 键入 trans /? 以查看帮助");
         if (DEBUG) {
             e.printStackTrace();
         }
     }
 
-    private static String[] clearFilterSpace(String[] args) {
+    private static String[] clearFilterSpace (String[] args) {
         if (args == null || args.length == 0) {
             return null;
         }

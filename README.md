@@ -8,10 +8,10 @@ Atrans(Android xml translate) Android项目layout drawable resources xml资源�
 1. 下载 [atrans.zip](https://github.com/yuxiangxin/Atrans/raw/master/extend/atrans.zip), 解压缩保存
 2. 配置环境变量  
    *为了在cmd窗口可以从任意路径访问`atrans`, 需要将`atrans.bat`所在目录添加到环境变量path中*.
-   1. 新建环境变量key:`atranspath`, value:为atrans所在目录
+   1. 新建环境变量key:`atranspath`, value:`atrans.bat所在目录`
    2. 将`%atranspath%`添加到环境变量path中
 ```path
-atranspath=save_path\atrans
+atranspath='atrans.bat所在目录'
 path=%atranspath%;
 ```
    ![添加环境变量](./extend/addToPath.png)    

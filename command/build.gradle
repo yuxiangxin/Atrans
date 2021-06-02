@@ -10,7 +10,7 @@ apply plugin: 'idea'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 group 'org.xiangxin'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 ext {
     baseJarName = 'atrans-command'
@@ -44,9 +44,15 @@ task generateCommand() {
     String rem = String.format("@ECHO OFF\n" +
             "REM Atrans(Android xml translate to Harmony) start bat\n" +
             "REM Version: v%s\n" +
-            "REM Build date: %s\n\n"
+            "REM Build date: %s"
             , version, SimpleDateFormat.dateInstance.format(System.currentTimeMillis()));
     StringBuilder contentBuilder = new StringBuilder(rem)
+            .append("\n")
+            .append("IF NOT EXIST \"%atranspath%\" (\n" +
+                    "\tECHO The environment of 'atranspath' is incorrect. Please check the environment variable:%atranspath%\n" +
+                    "\tPAUSE&EXIT\t\n" +
+                    ")")
+            .append("\n")
             .append("JAVA -jar %atranspath%\\")
             .append(String.format("%s-%s.jar", baseJarName, version))
             .append(" %atranspath% %cd% ");
