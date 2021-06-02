@@ -4,7 +4,6 @@
 
 Atrans(Android xml translate) Android项目layout drawable resources xml资源转Harmony对应json 或xml资源文件
 
-<<<<<<< HEAD
 ### 如何下载使用
 1. 下载 [atrans.zip](https://github.com/yuxiangxin/Atrans/raw/master/extend/atrans.zip), 解压缩保存
 2. 配置环境变量  
