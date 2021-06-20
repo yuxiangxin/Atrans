@@ -10,7 +10,7 @@ apply plugin: 'idea'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 group 'org.xiangxin'
-version '1.0'
+version '1.0.1'
 
 ext {
     baseJarName = 'atrans-command'

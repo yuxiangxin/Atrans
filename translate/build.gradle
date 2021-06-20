@@ -9,7 +9,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'maven'
 
 group = "org.xiangxin"
-version = '1.0'
+version = '1.0.1'
 repositories {
     mavenCentral()
 }
@@ -20,6 +20,12 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
+shadowJar {
+    from("../") {
+        include 'json_parse_config.xml'
+        include 'reply_parse_config.xml'
+    }
+}
 
 dependencies {
     compile files('libs\\dom4j-2.1.3.jar')

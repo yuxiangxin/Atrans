@@ -31,6 +31,7 @@ import org.xiangxin.atrans.translate.impl.reply.bean.ReplyRuleBean;
 import org.xiangxin.atrans.utils.LogUtils;
 import org.xiangxin.atrans.utils.Utils;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -61,15 +62,15 @@ public class ParserLoader {
 
     private static final ItemParser ITEM_PARSER = loadItemParser(Config.get().getJsonParseConfigFile());
 
-    public static ItemParser getItemParser() {
+    public static ItemParser getItemParser () {
         return ITEM_PARSER;
     }
 
-    private static ItemParser loadItemParser(String path) {
+    private static ItemParser loadItemParser (InputStream in) {
         SAXReader reader = new SAXReader();
         Document document;
         try {
-            document = reader.read(path);
+            document = reader.read(in);
             Element rootElement = document.getRootElement();
 
             HashMap<String, ItemParser> parserHashMap = new HashMap<>();
@@ -108,7 +109,7 @@ public class ParserLoader {
                 parserHashMap.put(itemName, itemParser);
             });
             if (parserHashMap.isEmpty()) {
-                throw new LoadException("解析器配置错误,请检查配置文件内容是否正确," + path);
+                throw new LoadException("解析器配置错误,请检查配置文件内容是否正确," + in);
             }
             return new ItemParserImpl(parserHashMap);
         } catch (DocumentException e) {
@@ -120,22 +121,22 @@ public class ParserLoader {
     private static class ItemParserImpl implements ItemParser {
         private final HashMap<String, ItemParser> parserHashMap;
 
-        public ItemParserImpl(HashMap<String, ItemParser> parserHashMap) {
+        public ItemParserImpl (HashMap<String, ItemParser> parserHashMap) {
             this.parserHashMap = parserHashMap;
         }
 
         @Override
-        public boolean isSupport(String elementName) {
+        public boolean isSupport (String elementName) {
             return parserHashMap.containsKey(elementName);
         }
 
         @Override
-        public Object parserElement(String elementName, Element element) {
+        public Object parserElement (String elementName, Element element) {
             return parserHashMap.get(elementName).parserElement(elementName, element);
         }
 
         @Override
-        public String getName(String itemName) {
+        public String getName (String itemName) {
             if (parserHashMap.containsKey(itemName)) {
                 return parserHashMap.get(itemName).getName(itemName);
             }
@@ -147,18 +148,18 @@ public class ParserLoader {
         private final String jsonKey;
         private final XmlReply xmlReply;
 
-        public KeyValueParserImpl(String parserName, XmlReply xmlReply) {
+        public KeyValueParserImpl (String parserName, XmlReply xmlReply) {
             this.xmlReply = xmlReply;
             this.jsonKey = parserName;
         }
 
         @Override
-        public boolean isSupport(String elementName) {
+        public boolean isSupport (String elementName) {
             return true;
         }
 
         @Override
-        public Object parserElement(String elementName, Element element) {
+        public Object parserElement (String elementName, Element element) {
             if (xmlReply != null) {
                 xmlReply.reply(element);
             }
@@ -168,7 +169,7 @@ public class ParserLoader {
         }
 
         @Override
-        public String getName(String rootElementName) {
+        public String getName (String rootElementName) {
             return jsonKey;
         }
     }
@@ -177,18 +178,18 @@ public class ParserLoader {
         private final String jsonKey;
         private final XmlReply xmlReply;
 
-        public ArrayParserImpl(String parserName, XmlReply xmlReply) {
+        public ArrayParserImpl (String parserName, XmlReply xmlReply) {
             this.xmlReply = xmlReply;
             this.jsonKey = parserName;
         }
 
         @Override
-        public boolean isSupport(String elementName) {
+        public boolean isSupport (String elementName) {
             return false;
         }
 
         @Override
-        public Object parserElement(String elementName, Element element) {
+        public Object parserElement (String elementName, Element element) {
             if (xmlReply != null) {
                 xmlReply.reply(element);
             }
@@ -204,7 +205,7 @@ public class ParserLoader {
         }
 
         @Override
-        public String getName(String rootElementName) {
+        public String getName (String rootElementName) {
             return jsonKey;
         }
     }

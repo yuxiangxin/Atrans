@@ -25,6 +25,7 @@ import org.xiangxin.atrans.translate.LoadException;
 import org.xiangxin.atrans.translate.impl.reply.bean.ReplyRuleBean;
 import org.xiangxin.atrans.utils.LogUtils;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class ReplyRuleLoader {
         return REPLY_IMPL;
     }
 
-    private static XmlReply loadItemParser(String path) {
+    private static XmlReply loadItemParser(InputStream path) {
         SAXReader reader = new SAXReader();
         Document document;
         try {
