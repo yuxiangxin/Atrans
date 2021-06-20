@@ -151,6 +151,6 @@
     <reply name="attributeValue" src="fill_parent" mode="word_all">match_parent</reply>
     <reply name="attributeValue" src="wrap_content" mode="word_all">match_content</reply>
     <reply name="attributeValue" src="gone" mode="word_all">hide</reply>
-    <reply name="attributeValue" src="center_vertical" mode="contains_match">vertical_center</reply>
-    <reply name="attributeValue" src="center_horizontal" mode="contains_match">horizontal_center</reply>
+    <reply name="attributeValue" src="center_vertical" mode="word_all">vertical_center</reply>
+    <reply name="attributeValue" src="center_horizontal" mode="word_all">horizontal_center</reply>
 </rule>

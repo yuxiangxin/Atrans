@@ -6,6 +6,7 @@ plugins {
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'maven'
 
 group = "org.xiangxin"
 version = '1.0'
